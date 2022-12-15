@@ -85,6 +85,7 @@ export class AssetManager{
                     
                     let currLoad = new GLTFLoader();
                     await currLoad.load(this.models[i].model);
+                    console.log(currLoad)
 
                     let random_x = randomxy()[0];
                     let random_y = randomxy()[1];

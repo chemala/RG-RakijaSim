@@ -21,15 +21,19 @@ class App extends Application {
         const tree = new ObjectClasses.Tree(treepath);
         const plum = new ObjectClasses.Plum(plumpath);
         
-     
+        let gtfo = new GLTFLoader()
+        let gltf = await gtfo.load('../../common/models/test1terrain/test1.gltf')
+        this.scene = await gtfo.loadScene(0);
+        console.log(this.scene)
+        //this.scene.nodes[0].world=true;
         //const models = [castlepath,treepath,plumpath];
         const models = [worldpath,tree,plum];
         
 
-        this.assetmanager = new AssetManager(models);
-        await this.assetmanager.loadScene();
-        this.scene = await this.assetmanager.loadAssetsMod();
-        let treeAABB = await this.assetmanager.getTreeAABB();
+        //this.assetmanager = new AssetManager(models);
+        //await this.assetmanager.loadScene();
+        //this.scene = await this.assetmanager.loadAssetsMod();
+        //let treeAABB = await this.assetmanager.getTreeAABB();
         //this.light = new Light();
         const player = new Player();
 
@@ -40,7 +44,7 @@ class App extends Application {
         console.log(this.camera)
         this.time = performance.now();
         this.startTime = this.time;
-
+        /*
         if (!this.scene || !this.camera) {
             throw new Error('Scene or Camera not present in glTF');
         }
@@ -48,7 +52,7 @@ class App extends Application {
         if (!this.camera.camera) {
             throw new Error('Camera node does not contain a camera reference');
         }
-       
+       */
         this.camera.updateMatrix()
         this.canvas.addEventListener('click', e => this.canvas.requestPointerLock());
         document.addEventListener('pointerlockchange', e => {
@@ -64,7 +68,7 @@ class App extends Application {
         this.resize();
 
 
-        this.physics = new Physics(this.scene, treeAABB);
+        this.physics = new Physics(this.scene);
     }
 
     update() {
