@@ -28,9 +28,11 @@ export class AssetManager{
         const loader = new GLTFLoader();
         await loader.load(this.models[0])
         this.mainloader = loader;
-        this.cam = this.mainloader.loadNode("Camera");  
-
         this.scene = await this.mainloader.loadScene(this.mainloader.defaultScene);
+        
+        this.scene.nodes[0].world=true;
+        this.scene.nodes[1].world=true;
+
     }  
     
     async loadAssets(){
@@ -47,6 +49,8 @@ export class AssetManager{
                 let random_y = Math.floor(Math.random() * (50 - (-50) + 1)) + (-50);
                 
                 let node = await currLoad.loadNode(0);
+                let acc = await currLoad.loadAccessor(0);
+                node.aabb = {min: acc.min, max: acc.max}
                 node.translation = vec3.fromValues(random_x,0,random_y);
                 //node.scale = vec3.fromValues(2,2,2)
                 node.updateMatrix();
@@ -66,8 +70,8 @@ export class AssetManager{
                 let currLoad = new GLTFLoader();
                 await currLoad.load(this.models[i].model);
                 let aabb = await currLoad.loadAccessor(0)
-                let minmax = [aabb.min,aabb.max]
-                return minmax
+                
+                return aabb
             }
         }
     }
@@ -77,7 +81,7 @@ export class AssetManager{
             //Loading 100 trees for now at randomized x and z positions
             let nodes = []
             if(this.models[i] instanceof ObjectClasses.Tree){
-                for(let c = 0; c < 1; c++){
+                for(let c = 0; c < 80; c++){
                     
                     let currLoad = new GLTFLoader();
                     await currLoad.load(this.models[i].model);
@@ -89,6 +93,8 @@ export class AssetManager{
                     let random_angle = quat.fromValues(0,getRandomFloat(0,0.5,5),0,1);
             
                     let node = await currLoad.loadNode(0);
+                    let acc = await currLoad.loadAccessor(0);
+                    node.aabb = {min: acc.min, max: acc.max}
                     node.translation = vec3.fromValues(random_x,0,random_y);
                     node.rotation= random_angle
                     //node.scale = vec3.fromValues(2,2,2)
@@ -100,7 +106,7 @@ export class AssetManager{
                 }
             }   
             else{
-                    for(let c = 0; c < 10; c++){
+                    for(let c = 0; c < 100; c++){
                            
                         let currLoad = new GLTFLoader();
                         await currLoad.load(this.models[i].model);
@@ -109,7 +115,9 @@ export class AssetManager{
                         let random_y = Math.floor(Math.random() * (50 - (-50) + 1)) + (-50);
                         
                         let node = await currLoad.loadNode(0);
-                        node.translation = vec3.fromValues(random_x,0,random_y);
+                        let acc = await currLoad.loadAccessor(0);
+                        node.aabb = {min: acc.min, max: acc.max}
+                        node.translation = vec3.fromValues(random_x,0.1,random_y);
                         //node.scale = vec3.fromValues(2,2,2)
                         node.updateMatrix();
                         nodes.push(node);

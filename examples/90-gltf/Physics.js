@@ -1,27 +1,41 @@
 import { vec3, mat4 } from '../../lib/gl-matrix-module.js';
+import { CamNode } from './CamNode.js';
 
 export class Physics {
 
-    constructor(scene, accessors) {
+    constructor(scene) {
         this.scene = scene;
-        this.acc = accessors;
     }
 
     update(dt) {
-        this.scene.traverse(node => {
-            // Move every node with defined velocity.
-            if (node.velocity) {
-                vec3.scaleAndAdd(node.translation, node.translation, node.velocity, dt);
-                node.updateMatrix();
+        // this.scene.traverse(node => {
+        //     // Move every node with defined velocity.
+        //     if (node.velocity) {
+        //         vec3.scaleAndAdd(node.translation, node.translation, node.velocity, dt);
+        //         node.updateMatrix();
 
-                // After moving, check for collision with every other node.
+        //         // After moving, check for collision with every other node.
+        //         this.scene.traverse(other => {
+        //             if (node !== other) {
+        //                 this.resolveCollision(node, other);
+        //             }
+        //         });
+        //     }
+        // });
+
+        this.scene.traverse(node => {
+
+            if(node instanceof CamNode){
+                
                 this.scene.traverse(other => {
-                    if (node !== other) {
-                        this.resolveCollision(node, other);
+                    if (node !== other && !other.world) {
+                    this.resolveCollision(node, other);
                     }
                 });
             }
+
         });
+
     }
 
     intervalIntersection(min1, max1, min2, max2) {
@@ -39,9 +53,10 @@ export class Physics {
         const transform = node.getGlobalTransform();
         
         //const { min, max } = [this.acc.min, this.acc.max];
-      
-        const { min, max } = {min : [this.acc.min], max:  [this.acc.max]};
-      
+        console.log(node)
+        //const { min, max } = {min : [this.acc[0]], max:  [this.acc[1]]};
+        console.log(node.aabb)
+        const { min, max } = node.aabb;
         const vertices = [
             [min[0], min[1], min[2]],
             [min[0], min[1], max[2]],
@@ -69,6 +84,7 @@ export class Physics {
 
         // Check if there is collision.
         const isColliding = this.aabbIntersection(aBox, bBox);
+        console.log(isColliding)
         if (!isColliding) {
             return;
         }
