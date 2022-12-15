@@ -1,5 +1,5 @@
 import { mat4 } from '../../lib/gl-matrix-module.js';
-
+import { vec3 } from '../../lib/gl-matrix-module.js';
 import { WebGL } from '../../common/engine/WebGL.js';
 
 import { shaders } from './shaders.js';
@@ -13,10 +13,11 @@ export class Renderer {
         this.gl = gl;
         this.glObjects = new Map();
         this.programs = WebGL.buildPrograms(gl, shaders);
-
+        this.currentProgram = this.programs.perVertex;
         gl.clearColor(1, 1, 1, 1);
         gl.enable(gl.DEPTH_TEST);
         gl.enable(gl.CULL_FACE);
+        //gl.disable(gl.CULL_FACE);
     }
 
     prepareBufferView(bufferView) {
@@ -173,7 +174,7 @@ export class Renderer {
         mat4.mul(vpMatrix, camera.camera.matrix, vpMatrix);
         return vpMatrix;
     }
-
+    
     render(scene, camera) {
         const gl = this.gl;
 
@@ -188,10 +189,11 @@ export class Renderer {
             this.renderNode(node, mvpMatrix);
         }
     }
+    
 
     renderNode(node, mvpMatrix) {
         const gl = this.gl;
-
+        //osvetljevanje 5 47min
         mvpMatrix = mat4.clone(mvpMatrix);
         mat4.mul(mvpMatrix, mvpMatrix, node.matrix);
 

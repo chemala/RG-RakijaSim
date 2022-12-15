@@ -26,7 +26,9 @@ export class Node {
 
         this.camera = options.camera || null;
         this.mesh = options.mesh || null;
-
+        //aabb added
+        this.aabb = options.aabb || null;
+        this.world = false;
         this.children = [...(options.children || [])];
         for (const child of this.children) {
             child.parent = this;

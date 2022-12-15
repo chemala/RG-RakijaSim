@@ -12,7 +12,7 @@ export class CamNode extends Node{
         Utils.init(this, this.constructor.defaults, options);
         this.projection = mat4.create();
         this.updateProjection();
-
+        this.aabb = {min: [0,1,0], max: [1, 3, 1]}
         this.pointermoveHandler = this.pointermoveHandler.bind(this);
         this.keydownHandler = this.keydownHandler.bind(this);
         this.keyupHandler = this.keyupHandler.bind(this);
@@ -22,9 +22,12 @@ export class CamNode extends Node{
     updateProjection() {
         mat4.perspective(this.projection, this.fov, this.aspect, this.near, this.far);
     }
+    inBounds(increment){
+        return (this.translation[0]+increment[0] < 15 && this.translation[0]+increment[0]>-15) && (this.translation[2]+increment[2] < 15 && this.translation[2]+increment[2]>-15)
+    }
 
     update(dt) {
-      
+        
         const c = this;
  
         const forward = vec3.set(vec3.create(),
@@ -36,21 +39,28 @@ export class CamNode extends Node{
         const acc = vec3.create();
       
         if (this.keys['KeyW']) {
-            
+            //if(this.inBounds(forward)){
             vec3.add(acc, acc, forward);
             console.log(this)
+            //}
         }
         if (this.keys['KeyS']) {
+            //if(this.inBounds(-forward)){
             vec3.sub(acc, acc, forward);
             console.log(this)
+            //}
         }
         if (this.keys['KeyD']) {
+            //if(this.inBounds(right)){
             vec3.add(acc, acc, right);
             console.log(this)
+            //}
         }
         if (this.keys['KeyA']) {
+            //if(this.inBounds(-right)){
             vec3.sub(acc, acc, right);
             console.log(this)
+            //}
         }
         if (this.keys['ShiftLeft']) {
             c.maxSpeed = 4;
@@ -82,9 +92,13 @@ export class CamNode extends Node{
         //Dodano iz 13 interactions da proradi kretanje s tipkama 
         const m = c.matrix;
         mat4.identity(m);
+        //let x = vec3.add(this.translation,this.translation, c.translation)
+        //console.log(x)
+
         mat4.translate(m, m, c.translation);
         mat4.rotateY(m, m, c.rotation[1]);
         mat4.rotateX(m, m, c.rotation[0]);
+        
         
     }
 

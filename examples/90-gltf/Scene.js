@@ -1,5 +1,5 @@
 import { Node } from './Node.js';
-
+import { mat4 } from '../../lib/gl-matrix-module.js';
 export class Scene {
 
     constructor(options = {}) {
@@ -14,7 +14,7 @@ export class Scene {
         for (const node of this.nodes) {
             this.traverseNode(node, before, after);
         }
-    }
+    }   
 
     traverseNode(node, before, after) {
         if (before) {

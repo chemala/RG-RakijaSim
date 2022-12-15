@@ -1,10 +1,10 @@
 import { Node } from './Node.js';
 export class Tree extends Node{
 
-    constructor(model){
+    constructor(model, aabb){
         super();
         this.model = model;
-
+        this.aabb = aabb
     }
 
 }
