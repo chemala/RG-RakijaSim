@@ -29,7 +29,10 @@ export class Physics {
                 
                 this.scene.traverse(other => {
                     if (node !== other && !other.world) {
+                        console.log(other.getAABB())
+                        if(other.getAABB()){
                     this.resolveCollision(node, other);
+                        }
                     }
                 });
             }
@@ -55,8 +58,8 @@ export class Physics {
         //const { min, max } = [this.acc.min, this.acc.max];
         console.log(node)
         //const { min, max } = {min : [this.acc[0]], max:  [this.acc[1]]};
-        console.log(node.aabb)
-        const { min, max } = node.aabb;
+        //const { min, max } = node.aabb;
+        const { min, max } = node.getAABB();
         const vertices = [
             [min[0], min[1], min[2]],
             [min[0], min[1], max[2]],

@@ -6,11 +6,14 @@ export class Player{
     constructor() {
         this.camera = new CamNode({translation : vec3.fromValues(2,1,0)})
         this.camera.camera = new PerspectiveCamera();
-        this.aabb = {min: [0,1,0], max: [0.5, 2, 0.5]}
+        this.aabb = {min: [-0.2,-0.2,-0.2], max: [0.2, 0.2, 0.2]}
     }
 
     getCamera(){
         return this.camera;
+    }
+    getAABB(){
+        return this.aabb
     }
 
     getInnerCam(){

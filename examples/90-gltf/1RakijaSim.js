@@ -1,6 +1,6 @@
 import { Application } from '../../common/engine/Application.js';
 import { vec3 } from '../../lib/gl-matrix-module.js';
-import { AssetManager } from './AssetManager.js';
+import { AssetManager } from './Unused/AssetManager.js';
 import * as ObjectClasses from  './ObjectClasses.js';
 import { CamNode } from './CamNode.js';
 import { shaders } from './shaders.js';
@@ -24,35 +24,31 @@ class App extends Application {
         let gtfo = new GLTFLoader()
         let gltf = await gtfo.load('../../common/models/test1terrain/test1.gltf')
         this.scene = await gtfo.loadScene(0);
-        console.log(this.scene)
-        //this.scene.nodes[0].world=true;
-        //const models = [castlepath,treepath,plumpath];
+        console.log(this.scene.nodes[0])
+        this.scene.nodes[0].world=true;
+        this.scene.nodes[1].world=true;
+
         const models = [worldpath,tree,plum];
         
 
-        //this.assetmanager = new AssetManager(models);
-        //await this.assetmanager.loadScene();
-        //this.scene = await this.assetmanager.loadAssetsMod();
-        //let treeAABB = await this.assetmanager.getTreeAABB();
-        //this.light = new Light();
         const player = new Player();
 
         this.camera = player.getCamera();
         this.camera.camera = player.getInnerCam();
-        
       
-        console.log(this.camera)
         this.time = performance.now();
         this.startTime = this.time;
-        /*
-        if (!this.scene || !this.camera) {
-            throw new Error('Scene or Camera not present in glTF');
+        
+        if (!this.scene) {
+            throw new Error('Scene not present in glTF');
         }
-
+        if (!this.camera) {
+            throw new Error('Camera node not present in Scene or glTF!');
+        }
         if (!this.camera.camera) {
             throw new Error('Camera node does not contain a camera reference');
         }
-       */
+       
         this.camera.updateMatrix()
         this.canvas.addEventListener('click', e => this.canvas.requestPointerLock());
         document.addEventListener('pointerlockchange', e => {
@@ -81,7 +77,7 @@ class App extends Application {
         //for(x in this.assetmanager.loaders){
             
         //}
-        //this.physics.update(dt);
+        this.physics.update(dt);
         //this.camera.updateMatrix()
        
         

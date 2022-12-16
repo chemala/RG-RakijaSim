@@ -1,4 +1,5 @@
 import { vec3, mat4, quat } from '../../lib/gl-matrix-module.js';
+import { Primitive } from './Primitive.js';
 
 export class Node {
 
@@ -23,11 +24,11 @@ export class Node {
         } else if (options.translation || options.rotation || options.scale) {
             this.updateMatrix();
         }
-
+        if(options.name){
+            this.name=options.name
+        }
         this.camera = options.camera || null;
         this.mesh = options.mesh || null;
-        //aabb added
-        this.aabb = options.aabb || null;
         this.world = false;
         this.children = [...(options.children || [])];
         for (const child of this.children) {
@@ -52,6 +53,12 @@ export class Node {
             this.rotation,
             this.translation,
             this.scale);
+    }
+    getAABB(){
+        let min =  this.mesh.primitives[0].attributes.POSITION.min
+        let max = this.mesh.primitives[0].attributes.POSITION.max
+        let aabb = {min: min, max: max}
+        return aabb
     }
 
     addChild(node) {

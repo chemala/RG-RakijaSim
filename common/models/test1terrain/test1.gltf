@@ -23,7 +23,7 @@
     "nodes" : [
         {
             "mesh" : 0,
-            "name" : "Sphere.001",
+            "name" : "Skybox",
             "scale" : [
                 30,
                 30,
@@ -32,7 +32,7 @@
         },
         {
             "mesh" : 1,
-            "name" : "Cube",
+            "name" : "Ground",
             "scale" : [
                 10,
                 0,
@@ -41,7 +41,7 @@
         },
         {
             "mesh" : 2,
-            "name" : "tree_1.001",
+            "name" : "Tree1",
             "rotation" : [
                 0,
                 0.7071068286895752,
@@ -61,7 +61,7 @@
         },
         {
             "mesh" : 3,
-            "name" : "tree_1",
+            "name" : "Tree2",
             "rotation" : [
                 0,
                 -0.08836393058300018,
@@ -81,7 +81,7 @@
         },
         {
             "mesh" : 4,
-            "name" : "Icosphere",
+            "name" : "Plum1",
             "rotation" : [
                 -0.634291410446167,
                 0.5650043487548828,
@@ -101,7 +101,7 @@
         },
         {
             "mesh" : 5,
-            "name" : "tree_1.002",
+            "name" : "Tree3",
             "rotation" : [
                 0,
                 -0.40038159489631653,
@@ -121,7 +121,7 @@
         },
         {
             "mesh" : 6,
-            "name" : "tree_1.003",
+            "name" : "Tree4",
             "rotation" : [
                 0,
                 -0.6730263233184814,
@@ -141,7 +141,7 @@
         },
         {
             "mesh" : 7,
-            "name" : "Icosphere.001",
+            "name" : "Plum2",
             "rotation" : [
                 -0.2312450408935547,
                 -0.380392849445343,
@@ -161,7 +161,7 @@
         },
         {
             "mesh" : 8,
-            "name" : "Icosphere.002",
+            "name" : "Plum3",
             "rotation" : [
                 0.18163888156414032,
                 -0.7082387208938599,
