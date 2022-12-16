@@ -1,13 +1,13 @@
-import { Application } from '../../common/engine/Application.js';
-import { vec3 } from '../../lib/gl-matrix-module.js';
+import { Application } from '../../../common/engine/Application.js';
+import { vec3 } from '../../../lib/gl-matrix-module.js';
 import { AssetManager } from './AssetManager.js';
-import * as ObjectClasses from  './ObjectClasses.js';
-import { CamNode } from './CamNode.js';
+import * as ObjectClasses from  '../ObjectClasses.js';
+import { CamNode } from '../CamNode.js';
 
-import { GLTFLoader } from './GLTFLoader.js';
-import { PerspectiveCamera } from './PerspectiveCamera.js';
-import { Physics } from './Physics.js';
-import { Renderer } from './Renderer.js';
+import { GLTFLoader } from '../GLTFLoader.js';
+import { PerspectiveCamera } from '../PerspectiveCamera.js';
+import { Physics } from '../Physics.js';
+import { Renderer } from '../Renderer.js';
 
 class App extends Application {
 

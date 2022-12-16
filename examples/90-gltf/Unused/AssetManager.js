@@ -1,12 +1,12 @@
-import { Application } from '../../common/engine/Application.js';
-import { vec3 , quat} from '../../lib/gl-matrix-module.js';
-import { CamNode } from './CamNode.js';
-import { Node } from './Node.js';
-import { GLTFLoader } from './GLTFLoader.js';
-import * as ObjectClasses from  './ObjectClasses.js';
-import { PerspectiveCamera } from './PerspectiveCamera.js';
-import { Physics } from './Physics.js';
-import { Renderer } from './Renderer.js';
+import { Application } from '../../../common/engine/Application.js';
+import { vec3 , quat} from '../../../lib/gl-matrix-module.js';
+import { CamNode } from '../CamNode.js';
+import { Node } from '../Node.js';
+import { GLTFLoader } from '../GLTFLoader.js';
+import * as ObjectClasses from  '../ObjectClasses.js';
+import { PerspectiveCamera } from '../PerspectiveCamera.js';
+import { Physics } from '../Physics.js';
+import { Renderer } from '../Renderer.js';
 
 
 export class AssetManager{
@@ -85,6 +85,7 @@ export class AssetManager{
                     
                     let currLoad = new GLTFLoader();
                     await currLoad.load(this.models[i].model);
+                    console.log(currLoad)
 
                     let random_x = randomxy()[0];
                     let random_y = randomxy()[1];

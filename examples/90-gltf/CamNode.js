@@ -12,11 +12,14 @@ export class CamNode extends Node{
         Utils.init(this, this.constructor.defaults, options);
         this.projection = mat4.create();
         this.updateProjection();
-        this.aabb = {min: [0,1,0], max: [1, 3, 1]}
+        this.aabb = {min: [-0.5,-1,-0.5], max: [0.5, 1, 0.5]}
         this.pointermoveHandler = this.pointermoveHandler.bind(this);
         this.keydownHandler = this.keydownHandler.bind(this);
         this.keyupHandler = this.keyupHandler.bind(this);
         this.keys = {};
+    }
+    getAABB(){
+        return this.aabb;
     }
 
     updateProjection() {
@@ -41,25 +44,25 @@ export class CamNode extends Node{
         if (this.keys['KeyW']) {
             //if(this.inBounds(forward)){
             vec3.add(acc, acc, forward);
-            console.log(this)
+            //console.log(this)
             //}
         }
         if (this.keys['KeyS']) {
             //if(this.inBounds(-forward)){
             vec3.sub(acc, acc, forward);
-            console.log(this)
+            //console.log(this)
             //}
         }
         if (this.keys['KeyD']) {
             //if(this.inBounds(right)){
             vec3.add(acc, acc, right);
-            console.log(this)
+            //console.log(this)
             //}
         }
         if (this.keys['KeyA']) {
             //if(this.inBounds(-right)){
             vec3.sub(acc, acc, right);
-            console.log(this)
+            //console.log(this)
             //}
         }
         if (this.keys['ShiftLeft']) {
@@ -154,7 +157,7 @@ CamNode.defaults = {
     aspect           : 1,
     fov              : 1,
     near             : 0.01,
-    far              : 100,
+    far              : Infinity,
     velocity         : [0, 0, 0],
     pointerSensitivity : 0.002,
     maxSpeed         : 1,
