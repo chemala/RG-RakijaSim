@@ -13,6 +13,7 @@ import { Light } from './Light.js';
 class App extends Application {
 
     async start() {
+        /*
         const castlepath  = '../../common/models/castle/castle.gltf';
         const treepath = '../../common/models/tree/tree.gltf'
         const plumpath = '../../common/models/plum/plum.gltf';
@@ -20,21 +21,20 @@ class App extends Application {
 
         const tree = new ObjectClasses.Tree(treepath);
         const plum = new ObjectClasses.Plum(plumpath);
-        
+        */
+
         let gtfo = new GLTFLoader()
-        let gltf = await gtfo.load('../../common/models/test1terrain/test1.gltf')
+        await gtfo.load('../../common/models/test1terrain/test1.gltf')
         this.scene = await gtfo.loadScene(0);
         console.log(this.scene.nodes[0])
         this.scene.nodes[0].world=true;
         this.scene.nodes[1].world=true;
 
-        const models = [worldpath,tree,plum];
-        
+        //const models = [worldpath,tree,plum];
+        this.player = new Player();
 
-        const player = new Player();
-
-        this.camera = player.getCamera();
-        this.camera.camera = player.getInnerCam();
+        this.camera = this.player.getCamera();
+        this.camera.camera = this.player.getInnerCam();
       
         this.time = performance.now();
         this.startTime = this.time;
@@ -49,7 +49,7 @@ class App extends Application {
             throw new Error('Camera node does not contain a camera reference');
         }
        
-        this.camera.updateMatrix()
+        //this.player.camera.updateMatrix()
         this.canvas.addEventListener('click', e => this.canvas.requestPointerLock());
         document.addEventListener('pointerlockchange', e => {
             if (document.pointerLockElement === this.canvas) {
@@ -58,7 +58,7 @@ class App extends Application {
                 this.camera.disable();
             }
         });
-        this.scene.addNode(this.camera);
+        this.scene.addNode(this.player.camera);
         this.renderer = new Renderer(this.gl);
         this.renderer.prepareScene(this.scene);
         this.resize();
@@ -71,8 +71,9 @@ class App extends Application {
         const t = this.time = performance.now();
         const dt = (this.time - this.startTime) * 0.001;
         this.startTime = this.time;
-       
-        this.camera.update(dt);
+        
+        console.log(this.player);
+        this.player.camera.update(dt);
         
         //for(x in this.assetmanager.loaders){
             

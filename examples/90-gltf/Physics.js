@@ -1,5 +1,6 @@
 import { vec3, mat4 } from '../../lib/gl-matrix-module.js';
 import { CamNode } from './CamNode.js';
+import { Player } from './Player.js';
 
 export class Physics {
 
@@ -8,28 +9,29 @@ export class Physics {
     }
 
     update(dt) {
-        // this.scene.traverse(node => {
-        //     // Move every node with defined velocity.
-        //     if (node.velocity) {
-        //         vec3.scaleAndAdd(node.translation, node.translation, node.velocity, dt);
-        //         node.updateMatrix();
+        this.scene.traverse(node => {
+             // Move every node with defined velocity.
+             //if (node.velocity) {
+               //  vec3.scaleAndAdd(node.translation, node.translation, node.velocity, dt);
+                 //node.updateMatrix();
 
-        //         // After moving, check for collision with every other node.
-        //         this.scene.traverse(other => {
-        //             if (node !== other) {
-        //                 this.resolveCollision(node, other);
-        //             }
-        //         });
-        //     }
-        // });
+                 // After moving, check for collision with every other node.
+                 this.scene.traverse(other => {
+                     if (node !== other) {
+                         this.resolveCollision(node, other);
+                     }
+                 });
+             });
+            }
 
+        /*
         this.scene.traverse(node => {
 
             if(node instanceof CamNode){
                 
                 this.scene.traverse(other => {
                     if (node !== other && !other.world) {
-                        console.log(other.getAABB())
+                        //console.log(other.getAABB())
                         if(other.getAABB()){
                     this.resolveCollision(node, other);
                         }
@@ -38,8 +40,8 @@ export class Physics {
             }
 
         });
-
-    }
+        */
+    
 
     intervalIntersection(min1, max1, min2, max2) {
         return !(min1 > max2 || min2 > max1);
@@ -56,7 +58,7 @@ export class Physics {
         const transform = node.getGlobalTransform();
         
         //const { min, max } = [this.acc.min, this.acc.max];
-        console.log(node)
+        //console.log(node)
         //const { min, max } = {min : [this.acc[0]], max:  [this.acc[1]]};
         //const { min, max } = node.aabb;
         const { min, max } = node.getAABB();

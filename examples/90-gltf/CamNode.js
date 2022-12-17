@@ -12,7 +12,7 @@ export class CamNode extends Node{
         Utils.init(this, this.constructor.defaults, options);
         this.projection = mat4.create();
         this.updateProjection();
-        this.aabb = {min: [-0.5,-1,-0.5], max: [0.5, 1, 0.5]}
+        this.aabb = {min: [-0.2,-0.2,-0.2], max: [0.2, 0.2, 0.2]}
         this.pointermoveHandler = this.pointermoveHandler.bind(this);
         this.keydownHandler = this.keydownHandler.bind(this);
         this.keyupHandler = this.keyupHandler.bind(this);
@@ -30,7 +30,6 @@ export class CamNode extends Node{
     }
 
     update(dt) {
-        
         const c = this;
  
         const forward = vec3.set(vec3.create(),
@@ -97,7 +96,7 @@ export class CamNode extends Node{
         mat4.identity(m);
         //let x = vec3.add(this.translation,this.translation, c.translation)
         //console.log(x)
-
+    
         mat4.translate(m, m, c.translation);
         mat4.rotateY(m, m, c.rotation[1]);
         mat4.rotateX(m, m, c.rotation[0]);
