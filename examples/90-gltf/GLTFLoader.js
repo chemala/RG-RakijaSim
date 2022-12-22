@@ -9,6 +9,7 @@ import { PerspectiveCamera } from './PerspectiveCamera.js';
 import { OrthographicCamera } from './OrthographicCamera.js';
 import { Node } from './Node.js';
 import { Scene } from './Scene.js';
+import { Player } from './Player.js';
 
 // This class loads all GLTF resources and instantiates
 // the corresponding classes. Keep in mind that it loads
@@ -291,8 +292,14 @@ export class GLTFLoader {
         if (gltfSpec.mesh !== undefined) {
             options.mesh = await this.loadMesh(gltfSpec.mesh);
         }
+        let node = null;
+        console.log(options.name)
+        if(options.name === 'Player'){
+            node = new Player(options)
+        }else{
+            node = new Node(options);
+        }
 
-        const node = new Node(options);
         this.cache.set(gltfSpec, node);
         return node;
     }

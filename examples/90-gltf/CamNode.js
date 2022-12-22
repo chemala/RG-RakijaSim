@@ -2,6 +2,7 @@ import { vec3, mat4, vec4 } from '../../lib/gl-matrix-module.js';
 
 import { Utils } from './Utils.js';
 import { Node } from './Node.js';
+import { Breathing } from './Animation.js';
 
 
 
@@ -12,7 +13,9 @@ export class CamNode extends Node{
         Utils.init(this, this.constructor.defaults, options);
         this.projection = mat4.create();
         this.updateProjection();
-        this.aabb = {min: [-0.2,-0.2,-0.2], max: [0.2, 0.2, 0.2]}
+        this.aabb = {min: [-0.2,-1.5,-0.2], max: [0.2, 1.5, 0.2]}
+        this.player = options.player || null;
+        this.animation = new Breathing(this)
         this.pointermoveHandler = this.pointermoveHandler.bind(this);
         this.keydownHandler = this.keydownHandler.bind(this);
         this.keyupHandler = this.keyupHandler.bind(this);
@@ -41,35 +44,24 @@ export class CamNode extends Node{
         const acc = vec3.create();
       
         if (this.keys['KeyW']) {
-            //if(this.inBounds(forward)){
             vec3.add(acc, acc, forward);
-            //console.log(this)
-            //}
         }
         if (this.keys['KeyS']) {
-            //if(this.inBounds(-forward)){
             vec3.sub(acc, acc, forward);
-            //console.log(this)
-            //}
         }
         if (this.keys['KeyD']) {
-            //if(this.inBounds(right)){
             vec3.add(acc, acc, right);
-            //console.log(this)
-            //}
         }
         if (this.keys['KeyA']) {
-            //if(this.inBounds(-right)){
             vec3.sub(acc, acc, right);
-            //console.log(this)
-            //}
         }
         if (this.keys['ShiftLeft']) {
+            this.player.running=true;
             c.maxSpeed = 4;
         }else{
+            this.player.running=false;
             c.maxSpeed = 2;
         }
-
         // 2: update velocity
         vec3.scaleAndAdd(c.velocity, c.velocity, acc, dt * c.acceleration);
 
@@ -101,8 +93,12 @@ export class CamNode extends Node{
         mat4.rotateY(m, m, c.rotation[1]);
         mat4.rotateX(m, m, c.rotation[0]);
         
+        this.animation.breathe();
         
-    }
+  
+   
+        }
+    
 
     enable() {
         document.addEventListener('pointermove', this.pointermoveHandler);

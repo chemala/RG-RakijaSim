@@ -1,5 +1,6 @@
 import { vec3, mat4 } from '../../lib/gl-matrix-module.js';
 import { CamNode } from './CamNode.js';
+import { Light } from './Light.js';
 import { Player } from './Player.js';
 
 export class Physics {
@@ -10,6 +11,7 @@ export class Physics {
 
     update(dt) {
         this.scene.traverse(node => {
+            if(node instanceof  Player){
              // Move every node with defined velocity.
              //if (node.velocity) {
                //  vec3.scaleAndAdd(node.translation, node.translation, node.velocity, dt);
@@ -17,10 +19,11 @@ export class Physics {
 
                  // After moving, check for collision with every other node.
                  this.scene.traverse(other => {
-                     if (node !== other) {
+                     if (node !== other && !node.world && !other.world) {
                          this.resolveCollision(node, other);
                      }
                  });
+                }
              });
             }
 
@@ -54,6 +57,7 @@ export class Physics {
     }
 
     getTransformedAABB(node) {
+      
         // Transform all vertices of the AABB from local to global space.
         const transform = node.getGlobalTransform();
         
@@ -87,10 +91,17 @@ export class Physics {
         const aBox = this.getTransformedAABB(a);
         const bBox = this.getTransformedAABB(b);
 
+    
         // Check if there is collision.
         const isColliding = this.aabbIntersection(aBox, bBox);
-        console.log(isColliding)
+
+        if(isColliding){
+            a.plumPickCheck(this.scene, b);
+        }
         if (!isColliding) {
+            //if(a.translation[1]>=1){
+            //    a.translation[1]-=0.01
+            //}
             return;
         }
 
@@ -126,7 +137,8 @@ export class Physics {
         }
 
         vec3.add(a.translation, a.translation, minDirection);
-        a.updateMatrix();
+        // a.updateMatrix(); //DOESNT WORK WITH THIS
+
     }
 
 }

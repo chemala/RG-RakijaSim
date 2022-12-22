@@ -13,25 +13,24 @@ import { Light } from './Light.js';
 class App extends Application {
 
     async start() {
-        /*
-        const castlepath  = '../../common/models/castle/castle.gltf';
-        const treepath = '../../common/models/tree/tree.gltf'
-        const plumpath = '../../common/models/plum/plum.gltf';
-        const worldpath = '../../common/models/world/shitassterrain.gltf';
 
-        const tree = new ObjectClasses.Tree(treepath);
-        const plum = new ObjectClasses.Plum(plumpath);
-        */
 
         let gtfo = new GLTFLoader()
-        await gtfo.load('../../common/models/test1terrain/test1.gltf')
+        let ploader = new GLTFLoader()
+        await gtfo.load('../../common/models/test2/Scene.gltf')
+        await ploader.load('../../common/models/Player/player.gltf')
         this.scene = await gtfo.loadScene(0);
-        console.log(this.scene.nodes[0])
+
         this.scene.nodes[0].world=true;
         this.scene.nodes[1].world=true;
 
-        //const models = [worldpath,tree,plum];
-        this.player = new Player();
+        this.player = await ploader.loadNode(0)
+        this.scene.addNode(this.player)
+
+        this.light = new Light();
+        this.scene.addNode(this.light)
+
+        console.log(this.scene)
 
         this.camera = this.player.getCamera();
         this.camera.camera = this.player.getInnerCam();
@@ -49,7 +48,6 @@ class App extends Application {
             throw new Error('Camera node does not contain a camera reference');
         }
        
-        //this.player.camera.updateMatrix()
         this.canvas.addEventListener('click', e => this.canvas.requestPointerLock());
         document.addEventListener('pointerlockchange', e => {
             if (document.pointerLockElement === this.canvas) {
@@ -58,7 +56,7 @@ class App extends Application {
                 this.camera.disable();
             }
         });
-        this.scene.addNode(this.player.camera);
+
         this.renderer = new Renderer(this.gl);
         this.renderer.prepareScene(this.scene);
         this.resize();
@@ -72,23 +70,25 @@ class App extends Application {
         const dt = (this.time - this.startTime) * 0.001;
         this.startTime = this.time;
         
-        console.log(this.player);
+     
         this.player.camera.update(dt);
+
+        //dont work without both for some reason?
+        this.player.update()
         
-        //for(x in this.assetmanager.loaders){
-            
-        //}
+        this.player.translation = this.player.camera.translation;
+        
         this.physics.update(dt);
-        //this.camera.updateMatrix()
+  
        
         
         
     }
 
-
     render() {
         if (this.renderer) {
             this.renderer.render(this.scene, this.camera, this.light);
+            
         }
     }
 
@@ -109,3 +109,5 @@ const canvas = document.querySelector('canvas');
 const app = new App(canvas);
 await app.init();
 document.querySelector('.loader-container').remove();
+
+

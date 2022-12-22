@@ -27,6 +27,7 @@ export class Node {
         if(options.name){
             this.name=options.name
         }
+        this.exists = true;
         this.camera = options.camera || null;
         this.mesh = options.mesh || null;
         this.world = false;
@@ -57,7 +58,7 @@ export class Node {
     getAABB(){
         let min =  this.mesh.primitives[0].attributes.POSITION.min
         let max = this.mesh.primitives[0].attributes.POSITION.max
-        let aabb = {min: min, max: max}
+        let aabb = {min: vec3.scale(min, min, 0.5), max: vec3.scale(max, max, 0.5)}
         return aabb
     }
 

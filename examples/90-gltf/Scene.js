@@ -28,6 +28,20 @@ export class Scene {
         }
     }
 
+    //Function to remove a node when picked up
+    removeNode(node){
+        console.log(node)
+        for(let i = this.nodes.length - 1; i >= 0; i--){
+
+            if('name' in this.nodes[i]){
+                if(this.nodes[i].name == node.name){
+                    this.nodes.splice(i, 1);
+                }
+            }
+        
+        }
+    }
+
     clone() {
         return new Scene({
             ...this,
