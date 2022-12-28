@@ -11,7 +11,7 @@ export class Physics {
 
     update(dt) {
         this.scene.traverse(node => {
-            if(node instanceof  Player){
+            //if(node instanceof  Player){
              // Move every node with defined velocity.
              //if (node.velocity) {
                //  vec3.scaleAndAdd(node.translation, node.translation, node.velocity, dt);
@@ -23,7 +23,7 @@ export class Physics {
                          this.resolveCollision(node, other);
                      }
                  });
-                }
+                //}
              });
             }
 
@@ -96,7 +96,9 @@ export class Physics {
         const isColliding = this.aabbIntersection(aBox, bBox);
 
         if(isColliding){
+            if(a instanceof Player){
             a.plumPickCheck(this.scene, b);
+            }
         }
         if (!isColliding) {
             //if(a.translation[1]>=1){

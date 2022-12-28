@@ -13,7 +13,6 @@ export class CamNode extends Node{
         Utils.init(this, this.constructor.defaults, options);
         this.projection = mat4.create();
         this.updateProjection();
-        this.aabb = {min: [-0.2,-1.5,-0.2], max: [0.2, 1.5, 0.2]}
         this.player = options.player || null;
         this.animation = new Breathing(this)
         this.pointermoveHandler = this.pointermoveHandler.bind(this);
@@ -92,7 +91,7 @@ export class CamNode extends Node{
         mat4.translate(m, m, c.translation);
         mat4.rotateY(m, m, c.rotation[1]);
         mat4.rotateX(m, m, c.rotation[0]);
-        
+
         this.animation.breathe();
         
   

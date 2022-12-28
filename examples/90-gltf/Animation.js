@@ -13,8 +13,8 @@ export class Breathing{
         let bs;
         let bi;
         if(this.entity.player.running){
-            bs = 4*this.speed;
-            bi = 4*this.cap
+            bs = 7*this.speed;
+            bi = 15*this.cap
         }else{
             bs = this.speed
             bi = this.cap
