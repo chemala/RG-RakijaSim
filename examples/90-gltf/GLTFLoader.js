@@ -9,7 +9,7 @@ import { PerspectiveCamera } from './PerspectiveCamera.js';
 import { OrthographicCamera } from './OrthographicCamera.js';
 import { Node } from './Node.js';
 import { Scene } from './Scene.js';
-import { Player } from './Player.js';
+import { Player } from './ObjectClasses/Player.js';
 
 // This class loads all GLTF resources and instantiates
 // the corresponding classes. Keep in mind that it loads
@@ -296,7 +296,8 @@ export class GLTFLoader {
         console.log(options.name)
         if(options.name === 'Player'){
             node = new Player(options)
-        }else{
+        }
+        else{
             node = new Node(options);
         }
 

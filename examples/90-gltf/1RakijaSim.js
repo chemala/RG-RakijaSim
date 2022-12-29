@@ -8,7 +8,7 @@ import { GLTFLoader } from './GLTFLoader.js';
 import { PerspectiveCamera } from './PerspectiveCamera.js';
 import { Physics } from './Physics.js';
 import { Renderer } from './Renderer.js';
-import { Player } from './Player.js';
+import { Player } from './ObjectClasses/Player.js';
 import { Light } from './Light.js';
 class App extends Application {
 
@@ -25,6 +25,7 @@ class App extends Application {
         this.scene.nodes[1].world=true;
 
         this.player = await ploader.loadNode(0)
+        console.log(this.player)
         this.scene.addNode(this.player)
 
         this.light = new Light();

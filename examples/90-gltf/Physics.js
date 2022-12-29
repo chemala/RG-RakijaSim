@@ -1,7 +1,7 @@
 import { vec3, mat4 } from '../../lib/gl-matrix-module.js';
 import { CamNode } from './CamNode.js';
 import { Light } from './Light.js';
-import { Player } from './Player.js';
+import { Player } from './ObjectClasses/Player.js';
 
 export class Physics {
 
@@ -20,6 +20,7 @@ export class Physics {
                  // After moving, check for collision with every other node.
                  this.scene.traverse(other => {
                      if (node !== other && !node.world && !other.world) {
+                        if(node instanceof Player)
                          this.resolveCollision(node, other);
                      }
                  });
