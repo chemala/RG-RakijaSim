@@ -14,6 +14,7 @@ export class CamNode extends Node{
         this.projection = mat4.create();
         this.updateProjection();
         this.player = options.player || null;
+        this.world = true
         this.animation = new Breathing(this)
         this.pointermoveHandler = this.pointermoveHandler.bind(this);
         this.keydownHandler = this.keydownHandler.bind(this);
@@ -32,6 +33,7 @@ export class CamNode extends Node{
     }
 
     update(dt) {
+        this.translation[1] = 1
         const c = this;
  
         const forward = vec3.set(vec3.create(),
@@ -153,9 +155,9 @@ CamNode.defaults = {
     near             : 0.01,
     far              : Infinity,
     velocity         : [0, 0, 0],
-    pointerSensitivity : 0.002,
-    maxSpeed         : 1,
-    friction         : 0.2,
-    acceleration     : 20
+    pointerSensitivity : 0.0015,
+    maxSpeed         : 0.7,
+    friction         : 0.4,
+    acceleration     : 15
 };
 

@@ -9,8 +9,7 @@ import { PerspectiveCamera } from './PerspectiveCamera.js';
 import { OrthographicCamera } from './OrthographicCamera.js';
 import { Node } from './Node.js';
 import { Scene } from './Scene.js';
-import { Player } from './ObjectClasses/Player.js';
-import { Plum } from './ObjectClasses.js';
+import { parse } from './NodeParser.js';
 
 // This class loads all GLTF resources and instantiates
 // the corresponding classes. Keep in mind that it loads
@@ -294,17 +293,8 @@ export class GLTFLoader {
             options.mesh = await this.loadMesh(gltfSpec.mesh);
         }
         let node = null;
-        console.log(options.name)
-        if(options.name === 'Player'){
-            node = new Player(options)
-        }    
         
-        else{
-            
-            node = new Node(options);
-        }
-        
-
+        node = parse(options.name, options)
         this.cache.set(gltfSpec, node);
         return node;
     }
@@ -331,14 +321,8 @@ export class GLTFLoader {
     parseName(name){
 
         if(name!=null){
-            return name.match(/^\D+/)[0];
-        }
-    }
-
-    isWorld(input){
-        let name = this.parseName(input);
-        if(name == 'Skybox' || name == 'Ground' || name =='Tree' || name=='Plumtree'){
-            return true;
+      
+            return name.match(/^[a-zA-Z]+/)[0];
         }
     }
 

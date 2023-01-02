@@ -1,14 +1,13 @@
 import { Application } from '../../common/engine/Application.js';
 import { vec3 } from '../../lib/gl-matrix-module.js';
 import { AssetManager } from './Unused/AssetManager.js';
-import * as ObjectClasses from  './ObjectClasses.js';
 import { CamNode } from './CamNode.js';
 import { shaders } from './shaders.js';
 import { GLTFLoader } from './GLTFLoader.js';
 import { PerspectiveCamera } from './PerspectiveCamera.js';
 import { Physics } from './Physics.js';
 import { Renderer } from './Renderer.js';
-import { Player } from './ObjectClasses/Player.js';
+import { Player } from './ObjectClasses/Classes.js';
 import { Light } from './Light.js';
 class App extends Application {
 
@@ -17,15 +16,11 @@ class App extends Application {
 
         let gtfo = new GLTFLoader()
         let ploader = new GLTFLoader()
-        await gtfo.load('../../common/models/test2/Scene.gltf')
+        await gtfo.load('../../common/models/map/world.gltf')
         await ploader.load('../../common/models/Player/player.gltf')
         this.scene = await gtfo.loadScene(0);
 
-        this.scene.nodes[0].world=true;
-        this.scene.nodes[1].world=true;
-
         this.player = await ploader.loadNode(0)
-        console.log(this.player)
         this.scene.addNode(this.player)
 
         this.light = new Light();
@@ -74,11 +69,10 @@ class App extends Application {
      
         this.player.camera.update(dt);
 
-        //dont work without both for some reason?
         this.player.update()
-        
+      
         this.player.translation = this.player.camera.translation;
-        
+  
         this.physics.update(dt);
   
        
@@ -88,7 +82,7 @@ class App extends Application {
 
     render() {
         if (this.renderer) {
-            this.renderer.render(this.scene, this.camera, this.light);
+            this.renderer.render(this.scene, this.camera);
             
         }
     }

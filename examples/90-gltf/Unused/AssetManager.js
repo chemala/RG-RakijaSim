@@ -3,7 +3,6 @@ import { vec3 , quat} from '../../../lib/gl-matrix-module.js';
 import { CamNode } from '../CamNode.js';
 import { Node } from '../Node.js';
 import { GLTFLoader } from '../GLTFLoader.js';
-import * as ObjectClasses from  '../ObjectClasses.js';
 import { PerspectiveCamera } from '../PerspectiveCamera.js';
 import { Physics } from '../Physics.js';
 import { Renderer } from '../Renderer.js';
