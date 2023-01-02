@@ -35,12 +35,31 @@ export class Player extends Node{
         
     }
 
+    pickUpHandler(scene, b){
+        this.plumPickCheck(scene,b);
+        this.branchPickCheck(scene,b);
+    }
+
     plumPickCheck(scene, b){
-        if(b.name.slice(0, -1)==="Plum"){
+        if(b.parseName()==="Plum"){
             scene.traverse(node => {
                 if (node.name==b.name) {
                     if(this.checkPick()){
                     this.plumno++;
+                    scene.removeNode(node)
+                    }
+                    
+                }
+            });
+        }
+    }
+
+    branchPickCheck(scene, b){
+        if(b.parseName()==="Branch"){
+            scene.traverse(node => {
+                if (node.name==b.name) {
+                    if(this.checkPick()){
+                    this.branchno++;
                     scene.removeNode(node)
                     }
                     
@@ -64,4 +83,5 @@ Player.defaults = {
     translation      : vec3.fromValues(2,0,0),
     running          : false,
     plumno           : 0,
+    branchno         : 0,
 };

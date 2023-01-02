@@ -8,6 +8,7 @@ export class Scene {
 
     addNode(node) {
         this.nodes.push(node);
+        
     }
 
     traverse(before, after) {

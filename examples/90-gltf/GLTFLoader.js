@@ -10,6 +10,7 @@ import { OrthographicCamera } from './OrthographicCamera.js';
 import { Node } from './Node.js';
 import { Scene } from './Scene.js';
 import { Player } from './ObjectClasses/Player.js';
+import { Plum } from './ObjectClasses.js';
 
 // This class loads all GLTF resources and instantiates
 // the corresponding classes. Keep in mind that it loads
@@ -296,10 +297,13 @@ export class GLTFLoader {
         console.log(options.name)
         if(options.name === 'Player'){
             node = new Player(options)
-        }
+        }    
+        
         else{
+            
             node = new Node(options);
         }
+        
 
         this.cache.set(gltfSpec, node);
         return node;
@@ -322,6 +326,20 @@ export class GLTFLoader {
         const scene = new Scene(options);
         this.cache.set(gltfSpec, scene);
         return scene;
+    }
+
+    parseName(name){
+
+        if(name!=null){
+            return name.match(/^\D+/)[0];
+        }
+    }
+
+    isWorld(input){
+        let name = this.parseName(input);
+        if(name == 'Skybox' || name == 'Ground' || name =='Tree' || name=='Plumtree'){
+            return true;
+        }
     }
 
 }

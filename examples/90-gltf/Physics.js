@@ -2,7 +2,7 @@ import { vec3, mat4 } from '../../lib/gl-matrix-module.js';
 import { CamNode } from './CamNode.js';
 import { Light } from './Light.js';
 import { Player } from './ObjectClasses/Player.js';
-
+import { quat } from '../../lib/gl-matrix-module.js';
 export class Physics {
 
     constructor(scene) {
@@ -20,7 +20,7 @@ export class Physics {
                  // After moving, check for collision with every other node.
                  this.scene.traverse(other => {
                      if (node !== other && !node.world && !other.world) {
-                        if(node instanceof Player)
+                        //if(node instanceof Player)
                          this.resolveCollision(node, other);
                      }
                  });
@@ -62,10 +62,6 @@ export class Physics {
         // Transform all vertices of the AABB from local to global space.
         const transform = node.getGlobalTransform();
         
-        //const { min, max } = [this.acc.min, this.acc.max];
-        //console.log(node)
-        //const { min, max } = {min : [this.acc[0]], max:  [this.acc[1]]};
-        //const { min, max } = node.aabb;
         const { min, max } = node.getAABB();
         const vertices = [
             [min[0], min[1], min[2]],
@@ -88,24 +84,34 @@ export class Physics {
     }
 
     resolveCollision(a, b) {
+
+    
         // Get global space AABBs.
         const aBox = this.getTransformedAABB(a);
         const bBox = this.getTransformedAABB(b);
 
-    
         // Check if there is collision.
         const isColliding = this.aabbIntersection(aBox, bBox);
-
+        
         if(isColliding){
+
             if(a instanceof Player){
-            a.plumPickCheck(this.scene, b);
+            a.pickUpHandler(this.scene, b);
             }
+
+
         }
         if (!isColliding) {
-            //if(a.translation[1]>=1){
-            //    a.translation[1]-=0.01
-            //}
+            if(a.translation[1]>=1.5){
+               a.translation[1]-=0.01
+            }
             return;
+        }
+
+
+        if(a.parseName() == 'Plum' && b.parseName() == 'Plumtree'){
+            console.log("ye")
+            vec3.add(a.translation, a.translation, [0.1,0,0])
         }
 
         // Move node A minimally to avoid collision.
@@ -140,7 +146,9 @@ export class Physics {
         }
 
         vec3.add(a.translation, a.translation, minDirection);
-        // a.updateMatrix(); //DOESNT WORK WITH THIS
+        if(a.movable){    
+            a.updateMatrix();
+         }
 
     }
 

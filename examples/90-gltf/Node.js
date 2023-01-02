@@ -24,13 +24,16 @@ export class Node {
         } else if (options.translation || options.rotation || options.scale) {
             this.updateMatrix();
         }
+
         if(options.name){
             this.name=options.name
         }
+
         this.exists = true;
         this.camera = options.camera || null;
         this.mesh = options.mesh || null;
-        this.world = false;
+        this.world = this.isWorld() || false;
+        this.movable = this.isMovable() || false;
         this.children = [...(options.children || [])];
         for (const child of this.children) {
             child.parent = this;
@@ -58,8 +61,9 @@ export class Node {
     getAABB(){
         let min =  this.mesh.primitives[0].attributes.POSITION.min
         let max = this.mesh.primitives[0].attributes.POSITION.max
-        let aabb = {min: vec3.scale(min, min, 0.5), max: vec3.scale(max, max, 0.5)}
-        return aabb
+ 
+        return {min: vec3.scale(min, min, 0.5), max: vec3.scale(max, max, 0.5)}
+        
     }
 
     addChild(node) {
@@ -80,6 +84,33 @@ export class Node {
             ...this,
             children: this.children.map(child => child.clone()),
         });
+    }
+
+    parseName(){
+        if(this.name){
+        return this.name.match(/^[a-zA-Z]+/)[0];
+        }else{
+            return 'shit'
+        }
+    }
+
+    isWorld(){
+        let name = this.parseName(this.name);
+        if(name == 'Skybox' || name == 'Ground'){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    isMovable(){
+        let name = this.parseName(this.name);
+        console.log(name)
+        if(name =='Tree' || name=='Plumtree' || name=='Player' ){
+            return false;
+        }else{
+            return true;
+        }
     }
 
 }
