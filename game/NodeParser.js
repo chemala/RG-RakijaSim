@@ -1,5 +1,5 @@
 import { Node } from "./Node.js";
-import { Player, Branch, Plum, World, Immovable, House, Tree, PlumTree, AppleTree, PineTree, Grass } from "./ObjectClasses/Classes.js";
+import { Player, Branch, Plum, World, Immovable, House, Tree, PlumTree, AppleTree, PineTree, Grass, Boiler } from "./ObjectClasses/Classes.js";
 
 export function parse(node, options){
 
@@ -35,6 +35,9 @@ export function parse(node, options){
     }
     else if(parseName(node) === 'House'){
         return new House(options)
+    }
+    else if(parseName(node) === 'Kazan'){
+        return new Boiler(options)
     }
     else{
         return new Immovable(options);

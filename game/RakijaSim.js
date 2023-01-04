@@ -57,7 +57,7 @@ class App extends Application {
         this.physics = new Physics(this.scene);
 
         this.audio = new Audio('../../common/music/rakija.mp3');
-        this.audio.volume = 0.2
+        this.audio.volume = 0.3
         this.audio.play();
     }
 

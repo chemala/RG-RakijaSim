@@ -33,7 +33,13 @@ export class CamNode extends Node{
     }
 
     update(dt) {
-        this.translation[1] = 1
+        if(this.keys['Digit1']){
+            this.player.selected = 1;
+        }
+        else if(this.keys['Digit2']){
+            this.player.selected = 2;
+        }
+        this.translation[1] = 1;
         const c = this;
  
         const forward = vec3.set(vec3.create(),
@@ -94,7 +100,7 @@ export class CamNode extends Node{
         mat4.rotateY(m, m, c.rotation[1]);
         mat4.rotateX(m, m, c.rotation[0]);
 
-        this.animation.breathe();
+        //this.animation.breathe();
         
   
    
@@ -105,6 +111,7 @@ export class CamNode extends Node{
         document.addEventListener('pointermove', this.pointermoveHandler);
         document.addEventListener('keydown', this.keydownHandler);
         document.addEventListener('keyup', this.keyupHandler);
+
     }
 
     disable() {
@@ -140,12 +147,17 @@ export class CamNode extends Node{
     }
 
     keydownHandler(e) {
-        this.keys[e.code] = true;
+
+
+        
+        this.keys[e.code] = !e.repeat;
     }
 
     keyupHandler(e) {
         this.keys[e.code] = false;
     }
+
+
 
 }
 

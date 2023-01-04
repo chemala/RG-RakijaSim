@@ -69,6 +69,7 @@ export class Physics {
 
         // Check if there is collision.
         const isColliding = this.aabbIntersection(aBox, bBox);
+
         if(isColliding){
             console.log('ye')
             if(a instanceof Classes.Player){
