@@ -1,6 +1,6 @@
 import { Node } from "../Node.js";
 import { CamNode } from "../CamNode.js";
-import { quat, vec3 } from "../../../lib/gl-matrix-module.js";
+import { quat, vec3 } from "../../lib/gl-matrix-module.js";
 import { PerspectiveCamera } from "../PerspectiveCamera.js";
 import { Utils } from '../Utils.js';
 import * as Score from '../ScoreUpdater.js'
