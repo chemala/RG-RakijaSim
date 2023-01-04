@@ -231,6 +231,7 @@ void main() {
 }
 `;
 
+
 export const shaders = {
     simple: {vertex: vertex, fragment: fragment},
     perVertex: {
@@ -242,5 +243,5 @@ export const shaders = {
         fragment: perFragmentFragmentShader,
     }
     ,
-    phong:{vertex: vertexnew, fragment: fragmentnew}
+    phong:{vertex: vertexnew, fragment: fragmentnew},
 };

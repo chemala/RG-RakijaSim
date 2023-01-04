@@ -1,13 +1,28 @@
 import { Node } from "./Node.js";
-import { Player, Branch, Plum, World, Immovable } from "./ObjectClasses/Classes.js";
+import { Player, Branch, Plum, World, Immovable, House, Tree, PlumTree, AppleTree, PineTree, Grass } from "./ObjectClasses/Classes.js";
 
 export function parse(node, options){
 
     if(node === 'Player'){
         return new Player(options)
     }
-    else if(node === 'Skybox'){
+    else if(node === 'Skybox' || node ==='Ground' || node === 'Path1'){
         return new World(options)
+    }
+    else if(parseName(node) === 'Plumtree'){
+        return new PlumTree(options)
+    }
+    else if(parseName(node) === 'AppleTree'){
+        return new AppleTree(options)
+    }
+    else if(parseName(node) === 'Pine'){
+        return new PineTree(options)
+    }
+    else if(parseName(node) === 'Tree'){
+        return new Tree(options)
+    }
+    else if(parseName(node) === 'Grass'){
+        return new Grass(options)
     }
     else if(node === 'Ground'){
         return new World(options)
@@ -17,6 +32,9 @@ export function parse(node, options){
     }
     else if(parseName(node) === 'Branch'){
         return new Branch(options)
+    }
+    else if(parseName(node) === 'House'){
+        return new House(options)
     }
     else{
         return new Immovable(options);

@@ -186,7 +186,6 @@ export class Renderer {
 
         const mvpMatrix = this.getViewProjectionMatrix(camera);
         for (const node of scene.nodes) {
-            console.log(node)
             this.renderNode(node, mvpMatrix);
         }
     }

@@ -22,10 +22,7 @@ class App extends Application {
 
         this.player = await ploader.loadNode(0)
         this.scene.addNode(this.player)
-
-        this.light = new Light();
-        this.scene.addNode(this.light)
-
+        
         console.log(this.scene)
 
         this.camera = this.player.getCamera();
@@ -57,7 +54,6 @@ class App extends Application {
         this.renderer.prepareScene(this.scene);
         this.resize();
 
-
         this.physics = new Physics(this.scene);
     }
 
@@ -83,7 +79,7 @@ class App extends Application {
     render() {
         if (this.renderer) {
             this.renderer.render(this.scene, this.camera);
-            
+            this.renderer.render(this.scene, this.camera);
         }
     }
 

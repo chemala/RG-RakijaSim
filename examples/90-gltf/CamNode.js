@@ -58,10 +58,10 @@ export class CamNode extends Node{
         }
         if (this.keys['ShiftLeft']) {
             this.player.running=true;
-            c.maxSpeed = 4;
+            c.maxSpeed = 5;
         }else{
             this.player.running=false;
-            c.maxSpeed = 2;
+            c.maxSpeed = 3;
         }
         // 2: update velocity
         vec3.scaleAndAdd(c.velocity, c.velocity, acc, dt * c.acceleration);

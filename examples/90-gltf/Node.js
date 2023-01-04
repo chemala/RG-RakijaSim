@@ -54,14 +54,7 @@ export class Node {
             this.translation,
             this.scale);
     }
-    getAABB(){
-
-        let min =  this.mesh.primitives[0].attributes.POSITION.min
-        let max = this.mesh.primitives[0].attributes.POSITION.max
-        return {min: vec3.scale(min, min, 0.5), max: vec3.scale(max, max, 0.5)}
-        
-        
-    }
+    
 
     addChild(node) {
         this.children.push(node);

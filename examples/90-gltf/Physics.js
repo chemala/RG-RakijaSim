@@ -10,13 +10,15 @@ export class Physics {
     }
 
     update(dt) {
+
         this.scene.traverse(node => {
                  this.scene.traverse(other => {
-                    
+                    if(node instanceof Classes.Player){
                      if (node != other && !node.world && !other.world) {
 
                          this.resolveCollision(node, other);
                      }
+                    }
 
                  });
              });
@@ -68,17 +70,20 @@ export class Physics {
         // Check if there is collision.
         const isColliding = this.aabbIntersection(aBox, bBox);
         if(isColliding){
+            console.log('ye')
             if(a instanceof Classes.Player){
             a.pickUpHandler(this.scene, b);
             }
 
         }
         if (!isColliding) {
+            /*
             if(a instanceof Classes.Player){
                 if(a.translation[1]>=1.5){
                 a.translation[1]-=0.01
                 }
             }
+            */
             return;
         }
 
