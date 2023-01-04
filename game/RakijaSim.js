@@ -55,6 +55,10 @@ class App extends Application {
         this.resize();
 
         this.physics = new Physics(this.scene);
+
+        this.audio = new Audio('../../common/music/srce.mp3');
+        this.audio.volume = 0.2
+        this.audio.play();
     }
 
     update() {
