@@ -9,6 +9,7 @@ import { Physics } from './Physics.js';
 import { Renderer } from './Renderer.js';
 import { Player } from './ObjectClasses/Classes.js';
 import { Light } from './Light.js';
+import { AudioClass } from './AudioClass.js';
 class App extends Application {
 
     async start() {
@@ -56,9 +57,10 @@ class App extends Application {
 
         this.physics = new Physics(this.scene);
 
-        this.audio = new Audio('../../common/music/rakija.mp3');
-        this.audio.volume = 0.3
-        this.audio.play();
+
+        this.audio = new AudioClass();
+        this.audio.playA();
+        
     }
 
     update() {
