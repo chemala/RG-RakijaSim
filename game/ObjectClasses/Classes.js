@@ -243,9 +243,8 @@ export class Player extends Node{
         super(options);
         Utils.init(this, this.constructor.defaults, options);
         this.updateMatrix();
-        this.camera = new CamNode({translation : vec3.fromValues(2,1,0), player:this}),
+        this.camera = new CamNode({translation : vec3.fromValues(2,1,0), player:this});
         this.camera.camera = new PerspectiveCamera();
-        this.pick = false;
     }
 
     getCamera(){
@@ -254,8 +253,8 @@ export class Player extends Node{
 
     update(){
         this.translation = vec3.fromValues(this.camera.translation[0],0,this.camera.translation[2]);
-        this.updateMatrix()
-        Score.updatePlums(this.plumno)
+        this.updateMatrix();
+        Score.updatePlums(this.plumno);
     }
     
     checkPick(){
@@ -269,11 +268,11 @@ export class Player extends Node{
     }
 
     plumSelected(){
-        return this.selected == 1
+        return this.selected == 1;
     }
 
     branchSelected(){
-        return this.selected == 2
+        return this.selected == 2;
     }
 
 
@@ -281,7 +280,7 @@ export class Player extends Node{
        
         this.plumPickCheck(scene,b);
         this.branchPickCheck(scene,b);
-        this.depositCheck(b)
+        this.depositCheck(b);
         
     }
 
@@ -291,7 +290,7 @@ export class Player extends Node{
                 if (node.name==b.name) {
                     if(this.checkPick()){
                     this.plumno++;
-                    scene.removeNode(node)
+                    scene.removeNode(node);
                     }
                     
                 }
@@ -305,7 +304,7 @@ export class Player extends Node{
                 if (node.name==b.name) {
                     if(this.checkPick()){
                     this.branchno++
-                    scene.removeNode(node)
+                    scene.removeNode(node);
                     }
                     
                 }
@@ -319,15 +318,16 @@ export class Player extends Node{
             if(this.plumSelected() && this.checkPick()){
                 if(this.plumno>0){
                     b.plumno += this.plumno;
-                    console.log(this.plumno + ' Plums deposited!')
+                    console.log(this.plumno + ' Plums deposited!');
                     this.plumno = 0;
+                    this.score += 0.5;
                 }
 
             }
             if(this.branchSelected() && this.checkPick()){
                 if(this.branchno>0){
                     b.branchno += this.branchno;
-                    console.log(this.branchno + ' Wood deposited!')
+                    console.log(this.branchno + ' Wood deposited!');
                     this.branchno = 0;
                 }
 
@@ -353,7 +353,8 @@ Player.defaults = {
     movable          : false,
     plumno           : 0,
     branchno         : 0,
-    selected         : 1
+    selected         : 1,
+    Score            : 0
 };
 
 Boiler.defaults = {
