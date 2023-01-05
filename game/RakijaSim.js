@@ -45,9 +45,11 @@ class App extends Application {
         this.canvas.addEventListener('click', e => this.canvas.requestPointerLock());
         document.addEventListener('pointerlockchange', e => {
             if (document.pointerLockElement === this.canvas) {
+                document.getElementById("backbutton").style.visibility = "hidden"
                 this.camera.enable();
             } else {
                 this.camera.disable();
+                document.getElementById("backbutton").style.visibility = "visible"
             }
         });
 

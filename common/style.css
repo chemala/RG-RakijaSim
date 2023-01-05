@@ -29,8 +29,10 @@ body, html {
     position:absolute;
     top: 8px;
     right: 16px;
+    border: #000;
+    border-radius: 20px;
     left:auto;
-    background-color: #fff;
+    background-color: rgb(199, 100, 60);
     top: 16px;
 }
 
@@ -42,6 +44,7 @@ a.back {
     display: block;
     margin: 20px;
     padding: 5px 10px;
+    border-radius: 10px;
     background: #fff;
     border: 1px solid #ccc;
     cursor: pointer;
@@ -50,28 +53,43 @@ a.back {
 }
 
 span.plumscore {
-    display: inline-flex;
-    float: right;
-    margin: 20px;
-    padding: 5px 10px;
-    background: rgb(51, 49, 49);
+    display: inline;
+    position: absolute;
+    
+    margin-left: 10px;
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: rgb(0,0,0);
 }
 
 span.branchscore {
-    display: inline-flex;
-    float: right;
-    margin: 20px;
-    margin-top: 60px;
-    padding: 5px 10px;
-    background: rgb(51, 49, 49);
+    display: inline;
+    position: absolute;
+ 
+    margin-left: 10px;
+    
     text-decoration: none;
-    color: rgb(255, 255, 255);
+    color: rgb(0,0,0);
 }
 
 a.back:hover {
     background: #ddd;
+}
+
+div.inventory{
+    position: fixed;
+    left: 50%;
+    bottom: 5px;
+    transform: translate(-50%, -50%);
+    margin: 0 auto;
+}
+
+div.item1, div.item2{
+    margin: 10px ;
+    border: #000;
+    background-color: rgb(255, 255, 255);
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
 }
 
 .loader-container {
@@ -80,11 +98,34 @@ a.back:hover {
     justify-content: center;
 }
 
+.imgdiv{
+    margin: 10px;
+    width: 160px;
+
+}
+
+.inlineLeft, .inlineRight{
+    position:absolute;
+    display: inline;
+}
+
+.inlineRight{
+    right: 0;
+}
+
+.imgdiv2{
+    margin: 10px;
+    width: 160px;
+
+}
+.scorediv{
+    display: block;
+}
+
 
 .loader {
     width: 100px;
     height: 100px;
-
     border: 15px solid transparent;
     border-radius: 50%;
     border-top-color: #999;
@@ -92,6 +133,8 @@ a.back:hover {
 
     animation: spin 2s ease-in-out infinite;
 }
+
+
 
 @keyframes spin {
     0% { transform: rotate(0deg); }

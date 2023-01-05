@@ -279,6 +279,7 @@ export class Player extends Node{
             console.log(this.score)
         }
         Score.updatePlums(this.plumno);
+        Score.updateBranches(this.branchno);
     }
     
     checkPick(){
