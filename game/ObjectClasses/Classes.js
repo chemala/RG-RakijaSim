@@ -301,7 +301,6 @@ export class Player extends Node{
 
     branchPickCheck(scene, b){
         if(b instanceof Branch){
-            console.log(b.name)
             scene.traverse(node => {
                 if (node.name==b.name) {
                     if(this.checkPick()){

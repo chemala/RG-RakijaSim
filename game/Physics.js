@@ -71,7 +71,6 @@ export class Physics {
         const isColliding = this.aabbIntersection(aBox, bBox);
 
         if(isColliding){
-            console.log('ye')
             if(a instanceof Classes.Player){
             a.pickUpHandler(this.scene, b);
             }

@@ -150,7 +150,7 @@ export class CamNode extends Node{
 
 
         
-        this.keys[e.code] = !e.repeat;
+        this.keys[e.code] = true;
     }
 
     keyupHandler(e) {
