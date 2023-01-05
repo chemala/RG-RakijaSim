@@ -24,6 +24,25 @@ a:hover {
 }
 */
 
+.container {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+  
+.menu {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 33.3%;
+    margin-top: 2rem;
+    margin-bottom: 1.25rem;
+}
+
 .button {
     background-color: #4CAF50;
     border: none;
@@ -32,8 +51,8 @@ a:hover {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 24px;
-    margin: 4px 2px;
+    font-size: 60px;
+    margin: 16px 8px;
     cursor: pointer;
     transition-duration: 0.4s;
 }
