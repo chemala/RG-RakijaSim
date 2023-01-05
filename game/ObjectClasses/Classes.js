@@ -245,15 +245,38 @@ export class Player extends Node{
         this.updateMatrix();
         this.camera = new CamNode({translation : vec3.fromValues(2,1,0), player:this});
         this.camera.camera = new PerspectiveCamera();
+        this.time = 0
+
+        setInterval(() => {
+            console.log('game over')
+        }, 180*1000);
+
+        setInterval(() => {
+        this.time+=1
+        }, 1000);
     }
 
     getCamera(){
         return this.camera;
     }
 
+
+   
+
     update(){
         this.translation = vec3.fromValues(this.camera.translation[0],0,this.camera.translation[2]);
         this.updateMatrix();
+        console.log(this.time)
+        console.log(this.score)
+        if(this.time > 30){
+         
+            this.score -= 5
+            this.time = 0;
+            if(this.score < 0){
+                this.score = 0;
+            }
+            console.log(this.score)
+        }
         Score.updatePlums(this.plumno);
     }
     
@@ -318,15 +341,17 @@ export class Player extends Node{
             if(this.plumSelected() && this.checkPick()){
                 if(this.plumno>0){
                     b.plumno += this.plumno;
+                    this.score += this.plumno*1.7;
                     console.log(this.plumno + ' Plums deposited!');
                     this.plumno = 0;
-                    this.score += 0.5;
+                    
                 }
 
             }
             if(this.branchSelected() && this.checkPick()){
                 if(this.branchno>0){
                     b.branchno += this.branchno;
+                    this.time-= this.branchno*4
                     console.log(this.branchno + ' Wood deposited!');
                     this.branchno = 0;
                 }
@@ -354,7 +379,7 @@ Player.defaults = {
     plumno           : 0,
     branchno         : 0,
     selected         : 1,
-    Score            : 0
+    score            : 0
 };
 
 Boiler.defaults = {

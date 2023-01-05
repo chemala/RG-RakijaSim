@@ -88,19 +88,13 @@ export class CamNode extends Node{
         }
 
         vec3.scaleAndAdd(c.translation, c.translation, c.velocity, dt);
-
-        // Update the final transformation matrix based on the updated variables.
-        //Dodano iz 13 interactions da proradi kretanje s tipkama 
         const m = c.matrix;
+
         mat4.identity(m);
-        //let x = vec3.add(this.translation,this.translation, c.translation)
-        //console.log(x)
-    
         mat4.translate(m, m, c.translation);
         mat4.rotateY(m, m, c.rotation[1]);
         mat4.rotateX(m, m, c.rotation[0]);
 
-        //this.animation.breathe();
         
   
    

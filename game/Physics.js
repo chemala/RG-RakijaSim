@@ -77,13 +77,6 @@ export class Physics {
 
         }
         if (!isColliding) {
-            /*
-            if(a instanceof Classes.Player){
-                if(a.translation[1]>=1.5){
-                a.translation[1]-=0.01
-                }
-            }
-            */
             return;
         }
 
