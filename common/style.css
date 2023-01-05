@@ -29,8 +29,9 @@ body, html {
     position:absolute;
     top: 8px;
     right: 16px;
-    left: 0;
-    top: 0;
+    left:auto;
+    background-color: #fff;
+    top: 16px;
 }
 
 .no-touch {
@@ -48,10 +49,21 @@ a.back {
     color: #000;
 }
 
-a.score {
-    display: block;
+span.plumscore {
+    display: inline-flex;
     float: right;
     margin: 20px;
+    padding: 5px 10px;
+    background: rgb(51, 49, 49);
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+}
+
+span.branchscore {
+    display: inline-flex;
+    float: right;
+    margin: 20px;
+    margin-top: 60px;
     padding: 5px 10px;
     background: rgb(51, 49, 49);
     text-decoration: none;
