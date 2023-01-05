@@ -45,14 +45,12 @@ export class AudioClass{
 
 
     volumeA(e, ctx){
-        console.log(e)
         if(ctx.audioa.volume - 0.0003*e['deltaY'] > 0){
         ctx.audioa.volume = ctx.audioa.volume - 0.0003*e['deltaY']
         }
     }
     
     volumeB(e, ctx){
-        console.log(e)
         if(ctx.audiob.volume - 0.0003*e['deltaY'] > 0){
         ctx.audiob.volume = ctx.audiob.volume - 0.0003*e['deltaY']
         }
