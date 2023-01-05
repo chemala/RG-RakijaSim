@@ -195,7 +195,7 @@
         },
         {
             "mesh" : 1,
-            "name" : "Cube",
+            "name" : "Radio",
             "rotation" : [
                 0,
                 -0.4595903754234314,
@@ -13045,7 +13045,7 @@
         },
         {
             "mesh" : 136,
-            "name" : "Log5.001",
+            "name" : "RadioLog",
             "rotation" : [
                 0,
                 0.921650767326355,
