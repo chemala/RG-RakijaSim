@@ -245,14 +245,15 @@ export class Player extends Node{
         this.updateMatrix();
         this.camera = new CamNode({translation : vec3.fromValues(2,1,0), player:this});
         this.camera.camera = new PerspectiveCamera();
-        this.time = 0
+        this.time = 180
+        this.fire = 30
 
         setInterval(() => {
             console.log('game over')
         }, 180*1000);
 
         setInterval(() => {
-        this.time+=1
+        this.fire-=1
         }, 1000);
     }
 
@@ -266,12 +267,12 @@ export class Player extends Node{
     update(){
         this.translation = vec3.fromValues(this.camera.translation[0],0,this.camera.translation[2]);
         this.updateMatrix();
-        console.log(this.time)
+        console.log(this.fire)
         console.log(this.score)
-        if(this.time > 30){
+        if(this.fire == 0){
          
             this.score -= 5
-            this.time = 0;
+            this.fire = 30;
             if(this.score < 0){
                 this.score = 0;
             }
@@ -351,7 +352,7 @@ export class Player extends Node{
             if(this.branchSelected() && this.checkPick()){
                 if(this.branchno>0){
                     b.branchno += this.branchno;
-                    this.time-= this.branchno*4
+                    this.fire+= this.branchno*4
                     console.log(this.branchno + ' Wood deposited!');
                     this.branchno = 0;
                 }
