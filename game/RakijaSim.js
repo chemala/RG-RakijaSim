@@ -59,7 +59,7 @@ class App extends Application {
 
 
         this.audio = new AudioClass();
-        this.audio.playA();
+        this.audio.playB();
         
     }
 

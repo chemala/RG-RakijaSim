@@ -6,7 +6,7 @@ export class AudioClass{
         this.audioa.loop = true;
 
         this.audiob = new Audio('../../common/music/srce.mp3');      
-        this.audiob.volume = 0.3
+        this.audiob.volume = 0.5
         this.audiob.loop = true;
 
         this.playing = 0;
