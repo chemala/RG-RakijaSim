@@ -28,9 +28,7 @@ export class CamNode extends Node{
     updateProjection() {
         mat4.perspective(this.projection, this.fov, this.aspect, this.near, this.far);
     }
-    inBounds(increment){
-        return (this.translation[0]+increment[0] < 15 && this.translation[0]+increment[0]>-15) && (this.translation[2]+increment[2] < 15 && this.translation[2]+increment[2]>-15)
-    }
+
 
     update(dt) {
         if(this.keys['Digit1']){
@@ -95,7 +93,7 @@ export class CamNode extends Node{
         mat4.rotateY(m, m, c.rotation[1]);
         mat4.rotateX(m, m, c.rotation[0]);
 
-        
+        this.animation.breathe();
   
    
         }
@@ -141,9 +139,6 @@ export class CamNode extends Node{
     }
 
     keydownHandler(e) {
-
-
-        
         this.keys[e.code] = true;
     }
 

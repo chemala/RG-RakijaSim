@@ -129,7 +129,19 @@ export class Radio extends Node{
     update(player){
         this.distance = vec3.sqrDist(player.translation, this.translation);
         this.audio.distance = this.distance;
+        if(player.camera.keys['KeyE'] && this.audio.distance < 1.5){
+            let playing = this.audio.playing;
+            if(playing=0 || playing == 2){
+                this.audio.playA();
+            }else{
+                this.audio.playB();
+            }            
+        }
     }
+    
+    
+
+
 
     getAABB(){
 
@@ -293,14 +305,15 @@ export class Player extends Node{
         this.camera = new CamNode({translation : vec3.fromValues(2,1,0), player:this});
         this.camera.camera = new PerspectiveCamera();
         this.time = 180
-        this.fire = 30
+        this.fire = 25
 
         setInterval(() => {
             console.log('game over')
         }, 180*1000);
 
         setInterval(() => {
-        this.fire-=1
+        this.time-=1;
+        this.fire-=1;
         }, 1000);
     }
 
@@ -350,14 +363,13 @@ export class Player extends Node{
         this.plumPickCheck(scene,b);
         this.branchPickCheck(scene,b);
         this.depositCheck(b);
-        this.radioCheck(b);
         
     }
 
     radioCheck(b){
         if(b instanceof RadioLog){
             if(this.checkPick()){
-                let playing = b.audio.playing;
+                let playing = b.parent.audio.playing;
                 if(playing=0 || playing == 2){
                     b.audio.playA();
                 }else{
