@@ -5,7 +5,7 @@ import { Renderer } from './Renderer.js';
 class App extends Application {
 
     async start() {
-
+        
 
         let map = new GLTFLoader()
         let ploader = new GLTFLoader()
@@ -36,11 +36,11 @@ class App extends Application {
         this.canvas.addEventListener('click', e => this.canvas.requestPointerLock());
         document.addEventListener('pointerlockchange', e => {
             if (document.pointerLockElement === this.canvas) {
-                document.getElementById("backbutton").style.visibility = "hidden"
+                document.getElementById("backbutton").style.visibility = "hidden";
                 this.camera.enable();
             } else {
                 this.camera.disable();
-                document.getElementById("backbutton").style.visibility = "visible"
+                document.getElementById("backbutton").style.visibility = "visible";
             }
         });
 
@@ -49,12 +49,14 @@ class App extends Application {
         this.resize();
 
         this.physics = new Physics(this.scene);
+
+       document.getElementById('visibility').style.visibility = "visible";
         
     }
 
     update() {
 
-        if(this.player.time != 0 ){
+        if(this.player.time > -1){
 
         const t = this.time = performance.now();
         const dt = (this.time - this.startTime) * 0.001;
@@ -69,6 +71,9 @@ class App extends Application {
   
         this.physics.update(dt);
   
+        }else{
+            
+            console.log('GAME OVER')
         }
         
         
@@ -93,10 +98,12 @@ class App extends Application {
     }
 
 }
-
 const canvas = document.querySelector('canvas');
 const app = new App(canvas);
 await app.init();
+
+
 document.querySelector('.loader-container').remove();
+
 
 
