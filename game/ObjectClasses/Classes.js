@@ -129,9 +129,10 @@ export class Radio extends Node{
     update(player){
         this.distance = vec3.sqrDist(player.translation, this.translation);
         this.audio.distance = this.distance;
-        if(player.camera.keys['KeyE'] && this.audio.distance < 1.5){
+        this.audio.updateVolume();
+        if(player.camera.keys['KeyE'] && this.audio.distance < 1.2){
             let playing = this.audio.playing;
-            if(playing=0 || playing == 2){
+            if(playing ==0 || playing == 2){
                 this.audio.playA();
             }else{
                 this.audio.playB();

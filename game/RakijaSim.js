@@ -2,7 +2,6 @@ import { Application } from '../../common/engine/Application.js';
 import { GLTFLoader } from './GLTFLoader.js';
 import { Physics } from './Physics.js';
 import { Renderer } from './Renderer.js';
-import * as Classes from './ObjectClasses/Classes.js'
 class App extends Application {
 
     async start() {
