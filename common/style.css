@@ -26,7 +26,7 @@ body, html {
 }
 
 .scoreboard {
-    position:absolute;
+    position:relative;
     top: 8px;
     right: 16px;
     border: #000;
@@ -83,13 +83,45 @@ div.inventory{
     margin: 0 auto;
 }
 
+div.timerdiv{
+    position: fixed;
+    left: 50%;
+    top: 0%;
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #fff;
+}
+
+div.firediv{
+    position:relative;
+
+    left:auto;
+   
+    margin-top: 16px;
+}
+
+#visibility{
+    visibility: hidden;
+}
+
+div.tracker{
+    position: absolute;
+    right: 16px;
+    left:auto;
+    top: 16px;
+}
+
 div.item1, div.item2{
     text-align: center;
     justify-content: center;
     margin: 10px;
-    border: #000;
     background-color: rgb(255, 255, 255);
-    border-radius: 10px;
+    border:#000;
+    
+    border-width: 3px;
     display: inline-block;
     width: 80px;
     height: 50px;

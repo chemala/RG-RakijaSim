@@ -18,7 +18,7 @@ export class Plum extends Node{
 
         let min =  this.mesh.primitives[0].attributes.POSITION.min
         let max = this.mesh.primitives[0].attributes.POSITION.max
-        max[0] = 0.8
+        max[0] = 0.9
         max[2] = 1.7
         return {min: min, max: max}
         
@@ -121,22 +121,28 @@ export class Radio extends Node{
         this.world = false
         this.interacting = false;
         this.distance
-        this.audio = new AudioClass(10);
+        this.audio = new AudioClass();
         this.audio.playB();
         
     }
 
     update(player){
-        this.distance = vec3.sqrDist(player.translation, this.translation);
-        this.audio.distance = this.distance;
-        this.audio.updateVolume();
-        if(player.camera.keys['KeyE'] && this.audio.distance < 1.2){
-            let playing = this.audio.playing;
-            if(playing ==0 || playing == 2){
-                this.audio.playA();
-            }else{
-                this.audio.playB();
-            }            
+
+        if(player.playing){
+            this.distance = vec3.sqrDist(player.translation, this.translation);
+            this.audio.distance = this.distance;
+            this.audio.updateVolume();
+            if(player.camera.keys['KeyE'] && this.audio.distance < 1.2){
+                let playing = this.audio.playing;
+
+                if(playing == 0 || playing == 2){
+                    this.audio.playA();
+                }else{
+                    this.audio.playB();
+                }            
+            }
+        }else{
+            this.audio.stop();
         }
     }
     
@@ -299,6 +305,7 @@ export class House extends Node{
 
 
 export class Player extends Node{
+
     constructor(options) {
         super(options);
         Utils.init(this, this.constructor.defaults, options);
@@ -307,10 +314,6 @@ export class Player extends Node{
         this.camera.camera = new PerspectiveCamera();
         this.time = 180
         this.fire = 25
-
-        setInterval(() => {
-            console.log('game over')
-        }, 180*1000);
 
         setInterval(() => {
         this.time-=1;
@@ -336,8 +339,14 @@ export class Player extends Node{
                 this.score = 0;
             }
         }
+        if(this.time>0){
+            this.playing = true
+        }else{
+            this.playing = false
+        }
         Score.updatePlums(this.plumno);
         Score.updateBranches(this.branchno);
+        Score.updateTime(this.time);
     }
     
     checkPick(){
@@ -361,8 +370,16 @@ export class Player extends Node{
 
     pickUpHandler(scene, b){
        
-        this.plumPickCheck(scene,b);
-        this.branchPickCheck(scene,b);
+        if(this.plumno<15){
+            this.plumPickCheck(scene,b);
+        }else{
+            console.log('fulla')
+        }
+        if(this.branchno<4){
+            this.branchPickCheck(scene,b);
+        }else{
+            console.log('fullb')
+        }
         this.depositCheck(b);
         
     }
@@ -452,7 +469,8 @@ Player.defaults = {
     plumno           : 0,
     branchno         : 0,
     selected         : 1,
-    score            : 0
+    score            : 0,
+    playing          : 1,
 };
 
 Boiler.defaults = {
