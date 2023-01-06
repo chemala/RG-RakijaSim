@@ -3,6 +3,7 @@ import { CamNode } from "../CamNode.js";
 import { quat, vec3 } from "../../lib/gl-matrix-module.js";
 import { PerspectiveCamera } from "../PerspectiveCamera.js";
 import { Utils } from '../Utils.js';
+import { AudioClass } from "../AudioClass.js";
 import * as Score from '../ScoreUpdater.js'
 
 export class Plum extends Node{
@@ -112,6 +113,52 @@ export class AppleTree extends Node{
         
     }
 }
+
+export class Radio extends Node{
+    constructor(options){
+        super(options);
+        this.movable = false
+        this.world = false
+        this.interacting = false;
+        this.distance
+        this.audio = new AudioClass(10);
+        this.audio.playB();
+        
+    }
+
+    update(player){
+        this.distance = vec3.sqrDist(player.translation, this.translation);
+        this.audio.distance = this.distance;
+    }
+
+    getAABB(){
+
+        let min =  this.mesh.primitives[0].attributes.POSITION.min
+        let max = this.mesh.primitives[0].attributes.POSITION.max
+        return {min: min, max: max}
+        
+        
+    }
+}
+
+export class RadioLog extends Node{
+    constructor(options){
+        super(options);
+        this.movable = false
+        this.world = false
+        
+    }
+
+    getAABB(){
+
+        let min =  this.mesh.primitives[0].attributes.POSITION.min
+        let max = this.mesh.primitives[0].attributes.POSITION.max
+        return {min: min, max: max}
+        
+        
+    }
+}
+
 export class PineTree extends Node{
     constructor(options){
         super(options);
@@ -267,8 +314,6 @@ export class Player extends Node{
     update(){
         this.translation = vec3.fromValues(this.camera.translation[0],0,this.camera.translation[2]);
         this.updateMatrix();
-        console.log(this.fire)
-        console.log(this.score)
         if(this.fire == 0){
          
             this.score -= 5
@@ -276,7 +321,6 @@ export class Player extends Node{
             if(this.score < 0){
                 this.score = 0;
             }
-            console.log(this.score)
         }
         Score.updatePlums(this.plumno);
         Score.updateBranches(this.branchno);
@@ -306,7 +350,21 @@ export class Player extends Node{
         this.plumPickCheck(scene,b);
         this.branchPickCheck(scene,b);
         this.depositCheck(b);
+        this.radioCheck(b);
         
+    }
+
+    radioCheck(b){
+        if(b instanceof RadioLog){
+            if(this.checkPick()){
+                let playing = b.audio.playing;
+                if(playing=0 || playing == 2){
+                    b.audio.playA();
+                }else{
+                    b.audio.playB();
+                }            
+            }
+        }
     }
 
     plumPickCheck(scene, b){

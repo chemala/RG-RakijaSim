@@ -1,5 +1,5 @@
 export class AudioClass{
-    constructor(){
+    constructor(distance){
 
         this.audioa = new Audio('../../common/music/rakija.mp3');      
         this.audioa.volume = 0.3
@@ -8,7 +8,7 @@ export class AudioClass{
         this.audiob = new Audio('../../common/music/srce.mp3');      
         this.audiob.volume = 0.5
         this.audiob.loop = true;
-
+        this.distance = distance;
         this.playing = 0;
 
       
@@ -16,6 +16,7 @@ export class AudioClass{
 
     playA(){
         this.audioa.play();
+        this.playing = 1;
         this.audiob.pause();
         this.audiob.currentTime = 0;
 
@@ -29,7 +30,7 @@ export class AudioClass{
         this.audioa.pause();
         this.audioa.currentTime = 0;
         this.audiob.play();
-
+        this.playing = 2;
         document.addEventListener("wheel", (event) => { 
             this.volumeB(event, this) 
         }); 
@@ -41,18 +42,29 @@ export class AudioClass{
         this.audioa.currentTime = 0;
         this.audiob.pause();
         this.audiob.currentTime = 0;
+        this.playing = 0;
     }
 
 
     volumeA(e, ctx){
-        if(ctx.audioa.volume - 0.0003*e['deltaY'] > 0){
-        ctx.audioa.volume = ctx.audioa.volume - 0.0003*e['deltaY']
+
+        if(this.playing == 1){
+            if(this.distance < 1.5){
+                if(ctx.audioa.volume - 0.0003*e['deltaY'] > 0){
+                    ctx.audioa.volume = ctx.audioa.volume - 0.0003*e['deltaY']
+                }
+            }
         }
     }
     
     volumeB(e, ctx){
-        if(ctx.audiob.volume - 0.0003*e['deltaY'] > 0){
-        ctx.audiob.volume = ctx.audiob.volume - 0.0003*e['deltaY']
+
+        if(this.playing == 2){
+            if(this.distance < 1.5){
+                if(ctx.audiob.volume - 0.0003*e['deltaY'] > 0){
+                    ctx.audiob.volume = ctx.audiob.volume - 0.0003*e['deltaY']
+                }
+            }
         }
     }
     

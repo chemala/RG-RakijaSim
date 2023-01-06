@@ -16,6 +16,9 @@ export class Physics {
                     if(node instanceof Classes.Player){
                      if (node != other && !node.world && !other.world) {
 
+                        if(other instanceof Classes.Radio){
+                            other.update(node);
+                        }
                          this.resolveCollision(node, other);
                      }
                     }
@@ -72,7 +75,8 @@ export class Physics {
 
         if(isColliding){
             if(a instanceof Classes.Player){
-            a.pickUpHandler(this.scene, b);
+                a.pickUpHandler(this.scene, b);
+                
             }
 
         }

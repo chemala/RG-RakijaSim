@@ -1,5 +1,5 @@
 import { Node } from "./Node.js";
-import { Player, Branch, Plum, World, Immovable, House, Tree, PlumTree, AppleTree, PineTree, Grass, Boiler } from "./ObjectClasses/Classes.js";
+import { Player, Branch, Plum, World, Immovable, House, Tree, PlumTree, AppleTree, PineTree, Grass, Boiler, Radio, RadioLog } from "./ObjectClasses/Classes.js";
 
 export function parse(node, options){
 
@@ -23,6 +23,12 @@ export function parse(node, options){
     }
     else if(parseName(node) === 'Grass'){
         return new Grass(options)
+    }
+    else if(parseName(node) === 'Radio'){
+        return new Radio(options)
+    }
+    else if(parseName(node) === 'RadioLog'){
+        return new RadioLog(options)
     }
     else if(node === 'Ground'){
         return new World(options)

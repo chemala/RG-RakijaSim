@@ -84,13 +84,26 @@ div.inventory{
 }
 
 div.item1, div.item2{
-    margin: 10px ;
+    text-align: center;
+    justify-content: center;
+    margin: 10px;
     border: #000;
     background-color: rgb(255, 255, 255);
-    padding: 10px;
     border-radius: 10px;
     display: inline-block;
+    width: 80px;
+    height: 50px;
+
+    
 }
+
+img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+
+
 
 .loader-container {
     display: flex;
@@ -98,7 +111,7 @@ div.item1, div.item2{
     justify-content: center;
 }
 
-.imgdiv{
+.imgdiv, .imgdiv2{
     margin: 10px;
     width: 160px;
 
@@ -113,11 +126,6 @@ div.item1, div.item2{
     right: 0;
 }
 
-.imgdiv2{
-    margin: 10px;
-    width: 160px;
-
-}
 .scorediv{
     display: block;
 }
