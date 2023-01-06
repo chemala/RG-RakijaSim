@@ -32,6 +32,7 @@ body, html {
     border: #000;
     border-radius: 20px;
     left:auto;
+    padding: 3px;
     background-color: rgb(199, 100, 60);
     top: 16px;
 }
@@ -55,7 +56,7 @@ a.back {
 span.plumscore {
     display: inline;
     position: absolute;
-    
+    font-weight: bold;
     margin-left: 10px;
     text-decoration: none;
     color: rgb(0,0,0);
@@ -64,24 +65,15 @@ span.plumscore {
 span.branchscore {
     display: inline;
     position: absolute;
- 
+    font-weight: bold;
     margin-left: 10px;
-    
-    text-decoration: none;
-    color: rgb(0,0,0);
+    color: rgb(255, 255, 255);
 }
 
 a.back:hover {
     background: #ddd;
 }
 
-div.inventory{
-    position: fixed;
-    left: 50%;
-    bottom: 5px;
-    transform: translate(-50%, -50%);
-    margin: 0 auto;
-}
 
 div.timerdiv{
     position: fixed;
@@ -114,20 +106,6 @@ div.tracker{
     top: 16px;
 }
 
-div.item1, div.item2{
-    text-align: center;
-    justify-content: center;
-    margin: 10px;
-    background-color: rgb(255, 255, 255);
-    border:#000;
-    
-    border-width: 3px;
-    display: inline-block;
-    width: 80px;
-    height: 50px;
-
-    
-}
 
 img {
     max-width: 100%;

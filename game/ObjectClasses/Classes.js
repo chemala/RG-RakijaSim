@@ -291,7 +291,7 @@ export class House extends Node{
     getAABB(){
 
         let min =  this.mesh.primitives[0].attributes.POSITION.min
-        min[0] = -2.5
+        min[0] = -1.5
         min[1] = -1.3
         let max = this.mesh.primitives[0].attributes.POSITION.max
         max[0] = 8
@@ -316,8 +316,10 @@ export class Player extends Node{
         this.fire = 25
 
         setInterval(() => {
-        this.time-=1;
-        this.fire-=1;
+            if(this.playing){
+                this.time-=1;
+                this.fire-=1;
+            }
         }, 1000);
     }
 
@@ -358,15 +360,6 @@ export class Player extends Node{
         }
         
     }
-
-    plumSelected(){
-        return this.selected == 1;
-    }
-
-    branchSelected(){
-        return this.selected == 2;
-    }
-
 
     pickUpHandler(scene, b){
        
@@ -428,7 +421,7 @@ export class Player extends Node{
     depositCheck(b){
 
         if(b instanceof Boiler){
-            if(this.plumSelected() && this.checkPick()){
+            if(this.checkPick()){
                 if(this.plumno>0){
                     b.plumno += this.plumno;
                     this.score += this.plumno*1.7;
@@ -438,7 +431,7 @@ export class Player extends Node{
                 }
 
             }
-            if(this.branchSelected() && this.checkPick()){
+            if(this.checkPick()){
                 if(this.branchno>0){
                     b.branchno += this.branchno;
                     this.fire+= this.branchno*4
@@ -468,9 +461,8 @@ Player.defaults = {
     movable          : false,
     plumno           : 0,
     branchno         : 0,
-    selected         : 1,
     score            : 0,
-    playing          : 1,
+    playing          : true,
 };
 
 Boiler.defaults = {

@@ -8,7 +8,7 @@ export function updatePlums(plums){
 }
 
 export function updateBranches(branches){
-    branchScore.innerHTML="Branches: " + branches;
+    branchScore.innerHTML="Wood: " + branches;
 }
 
 

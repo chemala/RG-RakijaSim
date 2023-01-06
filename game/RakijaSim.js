@@ -36,9 +36,11 @@ class App extends Application {
         this.canvas.addEventListener('click', e => this.canvas.requestPointerLock());
         document.addEventListener('pointerlockchange', e => {
             if (document.pointerLockElement === this.canvas) {
+                this.player.playing = true;
                 document.getElementById("backbutton").style.visibility = "hidden";
                 this.camera.enable();
             } else {
+                this.player.playing = false;
                 this.camera.disable();
                 document.getElementById("backbutton").style.visibility = "visible";
             }
@@ -56,25 +58,26 @@ class App extends Application {
 
     update() {
 
-        if(this.player.time > -1){
-
-        const t = this.time = performance.now();
-        const dt = (this.time - this.startTime) * 0.001;
-        this.startTime = this.time;
-        
-     
-        this.player.camera.update(dt);
-
-        this.player.update()
-      
-        this.player.translation = this.player.camera.translation;
-  
-        this.physics.update(dt);
-  
-        }else{
+       
+            if(this.player.playing){
+                const t = this.time = performance.now();
+                const dt = (this.time - this.startTime) * 0.001;
+                this.startTime = this.time;
+                
             
-            console.log('GAME OVER')
-        }
+                this.player.camera.update(dt);
+
+                this.player.update()
+            
+                this.player.translation = this.player.camera.translation;
+        
+                this.physics.update(dt);
+        
+            }else{
+                    
+                console.log('GAME OVER')
+            }
+        
         
         
     }
