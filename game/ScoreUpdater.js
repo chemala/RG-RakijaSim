@@ -10,6 +10,9 @@ const wbranch = document.getElementById('maxb');
 
 const gover = document.getElementById('gameover');
 
+const scorediv = document.getElementById('enddialog');
+const percent = document.getElementById('percent');
+
 export function update(plumno, branchno, time, firetime){
     updatePlums(plumno);
     updateBranches(branchno);
@@ -54,11 +57,20 @@ export function showBranchWarn(){
     setTimeout(()=>{wbranch.style.visibility = 'hidden'}, 1000);
 }
 
-export function gameOver(){
-    gover.style.visibility = 'visible'
-    gover.style.userSelect = 'none';
+
+export function gameOver(score){
+
+    //gover.style.visibility = 'visible'
+    //gover.style.userSelect = 'none';
+
+    scorediv.style.visibility = 'visible'
+    scorediv.style.userSelect = 'none';
     document.getElementById("backbutton").style.visibility = "visible";
     document.exitPointerLock();
+
+    let color = percentageToHsl(score, 255, 360)
+    percent.style.color = color;
+    percent.innerHTML = (score/2).toFixed(0)+"%";
 }
 
 
@@ -66,4 +78,9 @@ function secsToMinutesAndSeconds(seconds) {
     var minutes = Math.floor(seconds / 60).toFixed(0);
     var seconds = seconds - minutes*60;
     return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+}
+
+function percentageToHsl(percentage, hue0, hue1) {
+    let hue = (percentage * (hue1 - hue0)) + hue0;
+    return 'hsl(' + hue + ', 100%, 50%)';
 }

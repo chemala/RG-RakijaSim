@@ -254,6 +254,7 @@ export class Boiler extends Node{
 
         let min =  this.mesh.primitives[0].attributes.POSITION.min
         let max = this.mesh.primitives[0].attributes.POSITION.max
+
         return {min: min, max: max}
         
         
@@ -312,7 +313,7 @@ export class Player extends Node{
         this.updateMatrix();
         this.camera = new CamNode({translation : vec3.fromValues(2,1,0), player:this});
         this.camera.camera = new PerspectiveCamera();
-        this.time = 180
+        this.time = 30
         this.fire = 25
         this.gameover = false;
 
@@ -347,7 +348,7 @@ export class Player extends Node{
         }else{
 
             this.playing = false;
-            Score.gameOver();
+            Score.gameOver(this.score);
             this.gameover = true;
             
         }
