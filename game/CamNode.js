@@ -31,15 +31,9 @@ export class CamNode extends Node{
 
 
     update(dt) {
-        if(this.keys['Digit1']){
-            this.player.selected = 1;
-        }
-        else if(this.keys['Digit2']){
-            this.player.selected = 2;
-        }
         this.translation[1] = 1;
         const c = this;
- 
+
         const forward = vec3.set(vec3.create(),
             -Math.sin(c.rotation[1]), 0, -Math.cos(c.rotation[1]));
         const right = vec3.set(vec3.create(),
@@ -47,17 +41,21 @@ export class CamNode extends Node{
 
         // 1: add movement acceleration
         const acc = vec3.create();
-      
+        let w,a,s,d = false;
         if (this.keys['KeyW']) {
+            w=true;
             vec3.add(acc, acc, forward);
         }
         if (this.keys['KeyS']) {
+            s=true;
             vec3.sub(acc, acc, forward);
         }
         if (this.keys['KeyD']) {
+            d=true;
             vec3.add(acc, acc, right);
         }
         if (this.keys['KeyA']) {
+            a=true;
             vec3.sub(acc, acc, right);
         }
         if (this.keys['ShiftLeft']) {
@@ -66,6 +64,11 @@ export class CamNode extends Node{
         }else{
             this.player.running=false;
             c.maxSpeed = 3;
+        }
+        if(w || a || s || d){
+            this.player.walking = true;
+        }else{
+            this.player.walking = false;
         }
         // 2: update velocity
         vec3.scaleAndAdd(c.velocity, c.velocity, acc, dt * c.acceleration);
@@ -94,8 +97,7 @@ export class CamNode extends Node{
         mat4.rotateX(m, m, c.rotation[0]);
 
         this.animation.breathe();
-  
-   
+
         }
     
 

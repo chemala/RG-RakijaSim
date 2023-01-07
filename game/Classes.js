@@ -3,7 +3,7 @@ import { CamNode } from "./CamNode.js";
 import { quat, vec3 } from "../lib/gl-matrix-module.js";
 import { PerspectiveCamera } from "./PerspectiveCamera.js";
 import { Utils } from './Utils.js';
-import { AudioClass } from "./AudioClass.js";
+import { AudioClass, Effects } from "./AudioClass.js";
 import * as Score from './ScoreUpdater.js'
 
 export class Plum extends Node{
@@ -316,6 +316,7 @@ export class Player extends Node{
         this.time = 180
         this.fire = 25
         this.gameover = false;
+        this.sounds = new Effects();
 
         setInterval(() => {
             if(this.playing && !this.gameover){
@@ -336,6 +337,7 @@ export class Player extends Node{
     update(){
         this.translation = vec3.fromValues(this.camera.translation[0],0,this.camera.translation[2]);
         this.updateMatrix();
+        this.sounds.update(this.walking, this.running);
         if(this.fire == 0){
          
             this.score -= 5
@@ -350,6 +352,7 @@ export class Player extends Node{
 
             this.playing = false;
             Score.gameOver(this.score);
+            this.sounds.playOutro();
             this.gameover = true;
             
         }
@@ -401,8 +404,9 @@ export class Player extends Node{
             scene.traverse(node => {
                 if (node.name==b.name) {
                     if(this.checkPick()){
-                    this.plumno++;
-                    scene.removeNode(node);
+                        this.sounds.playPickSound();
+                        this.plumno++;
+                        scene.removeNode(node);
                     }
                     
                 }
@@ -415,8 +419,9 @@ export class Player extends Node{
             scene.traverse(node => {
                 if (node.name==b.name) {
                     if(this.checkPick()){
-                    this.branchno++
-                    scene.removeNode(node);
+                        this.sounds.playPickSound();
+                        this.branchno++
+                        scene.removeNode(node);
                     }
                     
                 }
@@ -429,6 +434,7 @@ export class Player extends Node{
         if(b instanceof Boiler){
             if(this.checkPick()){
                 if(this.plumno>0){
+                    this.sounds.playDeposit();
                     b.plumno += this.plumno;
                     this.score += this.plumno*1.7;
                     this.plumno = 0;
@@ -438,6 +444,7 @@ export class Player extends Node{
             }
             if(this.checkPick()){
                 if(this.branchno>0){
+                    this.sounds.playDeposit();
                     b.branchno += this.branchno;
                     this.fire+= this.branchno*5
                     this.branchno = 0;
@@ -462,6 +469,7 @@ Player.defaults = {
     aabb             : {min: [-1,-0.1,0], max:[0.5,1,0.5]},
     translation      : vec3.fromValues(2,0,0),
     running          : false,
+    walking          : false,
     movable          : false,
     plumno           : 0,
     branchno         : 0,

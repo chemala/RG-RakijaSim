@@ -95,4 +95,59 @@ export class AudioClass{
 
 }
 
+export class Effects{
+    constructor(){
+        this.walk = new Audio('../../common/sounds/walk.mp3');      
+        this.walk.volume = 0.02
+        this.walk.loop = true;
+
+        this.run = new Audio('../../common/sounds/run.mp3');      
+        this.run.volume = 0.02
+        this.run.loop = true;
+
+        this.pick = new Audio('../../common/sounds/pickup.mp3');      
+        this.pick.volume = 1
+        this.pick.loop = false;
+
+        this.depo = new Audio('../../common/sounds/deposit.mp3');      
+        this.depo.volume = 1
+        this.depo.loop = false;
+
+        this.outro = new Audio('../../common/sounds/outro.mp3');      
+        this.outro.volume = 0.2
+        this.outro.loop = false;
+
+        this.gl = new Audio('../../common/sounds/glug.mp3');      
+        this.gl.volume = 0.6
+        this.gl.loop = false;
+
+
+    }
+
+    update(walking, running){
+        if(walking && running){
+            this.run.play();
+        }else if(walking){
+            this.walk.play();
+            this.run.pause();
+        }else{
+            this.run.pause();
+            this.walk.pause();
+        }
+    }
+
+    playPickSound(){
+        this.pick.play();
+    }
+
+    playDeposit(){
+        this.depo.play();
+    }
+
+    playOutro(){
+        this.gl.play();
+        this.outro.play()
+    }
+}
+
 
