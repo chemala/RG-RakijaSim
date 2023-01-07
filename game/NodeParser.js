@@ -1,5 +1,5 @@
 import { Node } from "./Node.js";
-import { Player, Branch, Plum, World, Immovable, House, Tree, PlumTree, AppleTree, PineTree, Grass, Boiler, Radio, RadioLog } from "./ObjectClasses/Classes.js";
+import { Player, Branch, Plum, World, Immovable, House, Tree, PlumTree, AppleTree, PineTree, Grass, Boiler, Radio, RadioLog } from "./Classes.js";
 
 export function parse(node, options){
 
@@ -7,7 +7,6 @@ export function parse(node, options){
         return new Player(options)
     }
     else if(node === 'Skybox' || node ==='Ground' || node === 'Path1'){
-        console.log(node)
         return new World(options)
     }
     else if(parseName(node) === 'Plumtree'){
@@ -15,9 +14,6 @@ export function parse(node, options){
     }
     else if(parseName(node) === 'AppleTree'){
         return new AppleTree(options)
-
-
-
     }
     else if(node.slice(0,10) === 'AppleTree.'){
         return new Grass(options)

@@ -15,7 +15,6 @@ class App extends Application {
 
         this.player = await ploader.loadNode(0)
         this.scene.addNode(this.player)
-        console.log(this.scene)
 
         this.camera = this.player.getCamera();
         this.camera.camera = this.player.getInnerCam();

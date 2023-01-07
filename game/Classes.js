@@ -1,10 +1,10 @@
-import { Node } from "../Node.js";
-import { CamNode } from "../CamNode.js";
-import { quat, vec3 } from "../../lib/gl-matrix-module.js";
-import { PerspectiveCamera } from "../PerspectiveCamera.js";
-import { Utils } from '../Utils.js';
-import { AudioClass } from "../AudioClass.js";
-import * as Score from '../ScoreUpdater.js'
+import { Node } from "./Node.js";
+import { CamNode } from "./CamNode.js";
+import { quat, vec3 } from "../lib/gl-matrix-module.js";
+import { PerspectiveCamera } from "./PerspectiveCamera.js";
+import { Utils } from './Utils.js';
+import { AudioClass } from "./AudioClass.js";
+import * as Score from './ScoreUpdater.js'
 
 export class Plum extends Node{
     constructor(options){
@@ -431,7 +431,6 @@ export class Player extends Node{
                 if(this.plumno>0){
                     b.plumno += this.plumno;
                     this.score += this.plumno*1.7;
-                    console.log(this.plumno + ' Plums deposited!');
                     this.plumno = 0;
                     
                 }
@@ -441,7 +440,6 @@ export class Player extends Node{
                 if(this.branchno>0){
                     b.branchno += this.branchno;
                     this.fire+= this.branchno*5
-                    console.log(this.branchno + ' Wood deposited!');
                     this.branchno = 0;
                 }
 

@@ -1,7 +1,7 @@
 import { vec3, mat4 } from '../../lib/gl-matrix-module.js';
 import { CamNode } from './CamNode.js';
 import { Light } from './Light.js';
-import * as Classes from './ObjectClasses/Classes.js';
+import * as Classes from './Classes.js';
 import { quat } from '../../lib/gl-matrix-module.js';
 export class Physics {
 

@@ -88,7 +88,6 @@ export class AudioClass{
             
             if(this.bset/(this.distance/15) < this.bset){
                 this.audiob.volume = this.bset/(this.distance/15);
-                console.log(this.audiob.volume)
             }
 
         }
