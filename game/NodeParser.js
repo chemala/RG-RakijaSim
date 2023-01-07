@@ -7,6 +7,7 @@ export function parse(node, options){
         return new Player(options)
     }
     else if(node === 'Skybox' || node ==='Ground' || node === 'Path1'){
+        console.log(node)
         return new World(options)
     }
     else if(parseName(node) === 'Plumtree'){
@@ -14,6 +15,12 @@ export function parse(node, options){
     }
     else if(parseName(node) === 'AppleTree'){
         return new AppleTree(options)
+
+
+
+    }
+    else if(node.slice(0,10) === 'AppleTree.'){
+        return new Grass(options)
     }
     else if(parseName(node) === 'Pine'){
         return new PineTree(options)
@@ -53,7 +60,7 @@ export function parse(node, options){
 function parseName(node){
 
     if(node!=null){
-  
+        
         return node.match(/^[a-zA-Z]+/)[0];
-    }
+    } 
 }

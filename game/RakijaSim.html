@@ -15,6 +15,15 @@
     <div class="fullscreen no-touch">
         <canvas></canvas>
     </div>
+    <div class="warning">
+    <span id="maxp" class="inw">Max plum capacity!</span>
+    <span id="maxb" class="inw">Max branch capacity!</span>
+    </div>
+
+    <div></div>
+    <div id="gameover">
+        <span>Time Up!</span>
+    </div>
 
     <div id="visibility">
         <div class="tracker">
@@ -22,20 +31,22 @@
 
                 <div class="scorediv">  
                     <div class="imgdiv">
-                        <img src="/common/html-resources/plum-html.png" alt="">
-                        <span id="plumnumber" class="plumscore">Plums:</span>
+                        <img src="/common/html-resources/plum-html.png" alt="" class="unselectable">
+                        <span id="plumnumber" class="plumscore" class="unselectable">Plums:</span>
                     </div>
                     
                     <div class="imgdiv2">
-                        <img src="/common/html-resources/branch-html.png" alt="">
-                        <span id="branchnumber" class="branchscore" >Wood:</span>
+                        <img src="/common/html-resources/branch-html.png" alt="" class="unselectable">
+                        <span id="branchnumber" class="branchscore" class="unselectable">Wood:</span>
                     </div>
                 </div>
             </div>
-            
-            <div id="firediv" class="firediv">
-                <span>blablaba</span>
-            </div>
+                <div>
+                    <img id="fireimg" src="/common/html-resources/fire-html.png" alt="" class="unselectable">
+                    <div id="firediv" class="firediv" >
+                        <progress id="fire" value="100" max="100" class="unselectable"></progress>
+                    </div>
+                </div>
         </div>
 
         <div class="timerdiv">

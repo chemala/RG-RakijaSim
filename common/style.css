@@ -27,14 +27,13 @@ body, html {
 
 .scoreboard {
     position:relative;
-    top: 8px;
-    right: 16px;
+
     border: #000;
     border-radius: 20px;
     left:auto;
     padding: 3px;
-    background-color: rgb(199, 100, 60);
-    top: 16px;
+    
+
 }
 
 .no-touch {
@@ -44,9 +43,10 @@ body, html {
 a.back {
     display: block;
     margin: 20px;
+    margin-top: 16px;
     padding: 5px 10px;
     border-radius: 10px;
-    background: #fff;
+    background: rgb(196, 202, 255, 1);
     border: 1px solid #ccc;
     cursor: pointer;
     text-decoration: none;
@@ -57,7 +57,7 @@ span.plumscore {
     display: inline;
     position: absolute;
     font-weight: bold;
-    margin-left: 10px;
+    margin-left: 25px;
     text-decoration: none;
     color: rgb(0,0,0);
 }
@@ -67,33 +67,88 @@ span.branchscore {
     position: absolute;
     font-weight: bold;
     margin-left: 10px;
-    color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
 }
 
 a.back:hover {
     background: #ddd;
 }
 
+.warning{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    visibility: hidden;
+}
+
+.inw{
+    display: flex;
+}
+
+#gameover{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    background-color: rgb(196, 202, 255, 0.8);
+    padding: 20px;
+    border: 5px;
+    transform: translate(-50%, -50%);
+    border-width: 2px;
+    border-color: rgb(113, 51, 194);
+    border-style: solid;
+    border-radius: 5px;
+    font-size: x-large;
+    font-weight: bold;
+    visibility: hidden;
+
+}
 
 div.timerdiv{
     position: fixed;
+    transform: translate(-50%, 0%);
     left: 50%;
     top: 0%;
-    margin-top: 20px;
-    border-radius: 10px;
+    margin-top: 16px;
+    border-radius: 8px;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
-    background-color: #fff;
+    background-color: rgb(196, 202, 255, 0.9);
 }
 
-div.firediv{
-    position:relative;
+.firediv{
+    margin-top: 4px;
+    position: relative;
+    display: inline-block;
+    background: #eee;
+    margin-right: 8px;
+    margin-left: 8px;
+    height: 20px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    overflow: hidden;
 
-    left:auto;
+}
+
+#fireimg{
+    margin-left: 12px;
+    margin-bottom: 8px;
+}
+
+.firediv::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
    
-    margin-top: 16px;
-}
+    background: rgb(241, 103, 22);
+  }
+
+progress {
+    opacity: 0;
+  }
 
 #visibility{
     visibility: hidden;
@@ -103,13 +158,24 @@ div.tracker{
     position: absolute;
     right: 16px;
     left:auto;
+    border-radius: 8px;
     top: 16px;
+    background-color: rgb(196, 202, 255);
 }
 
 
 img {
     max-width: 100%;
     max-height: 100%;
+}
+
+.unselectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 

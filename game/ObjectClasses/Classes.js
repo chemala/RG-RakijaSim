@@ -81,9 +81,9 @@ export class PlumTree extends Node{
         min[1] = -0.1
         min[2] = -0.1
         let max = this.mesh.primitives[0].attributes.POSITION.max
-        max[0] = 0.1
-        max[1] = 0.1
-        max[2] = 0.1
+        max[0] = 0.2
+        max[1] = 0.2
+        max[2] = 0.2
         return {min: min, max: max}
         
         
@@ -217,12 +217,12 @@ export class Tree extends Node{
     getAABB(){
 
         let min =  this.mesh.primitives[0].attributes.POSITION.min
-        min[0] = -0.2
+        min[0] = -0.1
         min[1] = -0.1
-        min[2] = -0.2
+        min[2] = -0.1
         let max = this.mesh.primitives[0].attributes.POSITION.max
-        max[0] = 0.2
-        max[1] = 0.1
+        max[0] = 0.3
+        max[1] = 0.3
         max[2] = 0.2
         return {min: min, max: max}
         
@@ -314,9 +314,10 @@ export class Player extends Node{
         this.camera.camera = new PerspectiveCamera();
         this.time = 180
         this.fire = 25
+        this.gameover = false;
 
         setInterval(() => {
-            if(this.playing){
+            if(this.playing && !this.gameover){
                 this.time-=1;
                 this.fire-=1;
             }
@@ -336,19 +337,22 @@ export class Player extends Node{
         if(this.fire == 0){
          
             this.score -= 5
-            this.fire = 30;
+            this.fire = 25;
             if(this.score < 0){
                 this.score = 0;
             }
         }
         if(this.time>0){
-            this.playing = true
+            this.playing = true;
         }else{
-            this.playing = false
+
+            this.playing = false;
+            Score.gameOver();
+            this.gameover = true;
+            
         }
-        Score.updatePlums(this.plumno);
-        Score.updateBranches(this.branchno);
-        Score.updateTime(this.time);
+
+        Score.update(this.plumno,this.branchno,this.time,this.fire);
     }
     
     checkPick(){
@@ -366,12 +370,12 @@ export class Player extends Node{
         if(this.plumno<15){
             this.plumPickCheck(scene,b);
         }else{
-            console.log('fulla')
+            Score.showPlumWarn();
         }
-        if(this.branchno<4){
+        if(this.branchno<5){
             this.branchPickCheck(scene,b);
         }else{
-            console.log('fullb')
+            Score.showBranchWarn();
         }
         this.depositCheck(b);
         

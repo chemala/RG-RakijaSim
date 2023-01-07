@@ -15,7 +15,7 @@ class App extends Application {
 
         this.player = await ploader.loadNode(0)
         this.scene.addNode(this.player)
-
+        console.log(this.scene)
 
         this.camera = this.player.getCamera();
         this.camera.camera = this.player.getInnerCam();
@@ -35,6 +35,7 @@ class App extends Application {
        
         this.canvas.addEventListener('click', e => this.canvas.requestPointerLock());
         document.addEventListener('pointerlockchange', e => {
+            if(!this.player.gameover){
             if (document.pointerLockElement === this.canvas) {
                 this.player.playing = true;
                 document.getElementById("backbutton").style.visibility = "hidden";
@@ -44,6 +45,7 @@ class App extends Application {
                 this.camera.disable();
                 document.getElementById("backbutton").style.visibility = "visible";
             }
+        }
         });
 
         this.renderer = new Renderer(this.gl);
@@ -73,18 +75,12 @@ class App extends Application {
         
                 this.physics.update(dt);
         
-            }else{
-                    
-                console.log('GAME OVER')
             }
-        
-        
         
     }
 
     render() {
-        if (this.renderer) {
-            this.renderer.render(this.scene, this.camera);
+        if (this.renderer && !this.player.gameover) {
             this.renderer.render(this.scene, this.camera);
         }
     }
