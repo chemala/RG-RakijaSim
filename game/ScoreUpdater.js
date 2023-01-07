@@ -68,7 +68,7 @@ export function gameOver(score){
     document.getElementById("backbutton").style.visibility = "visible";
     document.exitPointerLock();
 
-    let color = percentageToHsl(score, 255, 360)
+    let color = percentageToHsl(score, 255, 0)
     percent.style.color = color;
     percent.innerHTML = (score/2).toFixed(0)+"%";
 }

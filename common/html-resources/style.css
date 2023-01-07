@@ -121,6 +121,8 @@ a.back:hover {
 #percent{
     font-size:1cm;
     color: rgb(243, 37, 1);
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black;
 }
 
 div.ending{

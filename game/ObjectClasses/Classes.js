@@ -313,7 +313,7 @@ export class Player extends Node{
         this.updateMatrix();
         this.camera = new CamNode({translation : vec3.fromValues(2,1,0), player:this});
         this.camera.camera = new PerspectiveCamera();
-        this.time = 180
+        this.time = 5
         this.fire = 25
         this.gameover = false;
 
@@ -323,6 +323,7 @@ export class Player extends Node{
                 this.fire-=1;
             }
         }, 1000);
+
     }
 
     getCamera(){
