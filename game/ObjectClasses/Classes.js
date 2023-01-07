@@ -254,6 +254,7 @@ export class Boiler extends Node{
 
         let min =  this.mesh.primitives[0].attributes.POSITION.min
         let max = this.mesh.primitives[0].attributes.POSITION.max
+
         return {min: min, max: max}
         
         
@@ -347,7 +348,7 @@ export class Player extends Node{
         }else{
 
             this.playing = false;
-            Score.gameOver();
+            Score.gameOver(this.score);
             this.gameover = true;
             
         }

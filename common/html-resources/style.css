@@ -78,6 +78,7 @@ a.back:hover {
     position: fixed;
     top: 50%;
     left: 50%;
+    transform: translate(-50%, 0%);
     visibility: hidden;
 }
 
@@ -87,7 +88,7 @@ a.back:hover {
 
 #gameover{
     position: relative;
-    background-color: rgb(196, 202, 255, 0.8);
+    background-color: rgb(196, 202, 255);
     padding: 20px;
     border: 5px;
     left: 50%;
@@ -101,13 +102,12 @@ a.back:hover {
     font-size: x-large;
   
     font-weight: bold;
-    visibility: visible;
 
 }
 
 #scorediv{
     border-width: 2px;
-    background-color: rgb(196, 202, 255, 1);
+    background-color: rgb(196, 202, 255);
     border-color: rgb(113, 51, 194);
     border-style: solid;
     border-radius: 5px;
@@ -119,7 +119,7 @@ a.back:hover {
 }
 
 #percent{
-    font-size: xx-large;
+    font-size:1cm;
     color: rgb(243, 37, 1);
 }
 
@@ -127,6 +127,7 @@ div.ending{
     position: fixed;
     top: 50%;
     left: 50%;
+    visibility: hidden;
     transform: translate(-50%, -50%);
     display: block;
     
