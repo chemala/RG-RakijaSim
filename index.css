@@ -1,5 +1,14 @@
+html {
+    overflow:hidden;
+}
+
 body {
+    background-image: url("common/html-resources/Game_bck.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment:fixed;
     margin: 10px;
+    overflow:hidden;
 }
 
 ul {

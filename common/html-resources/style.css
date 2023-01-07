@@ -256,6 +256,14 @@ img {
     text-align: center;
 }
 
+.instructions {
+    flex-basis: 100rem;
+    margin: 2rem 0;
+    font-size: 1.85rem;
+    line-height: 1.2;
+    padding: 1rem;
+}
+
 @keyframes spin {
     0% { transform: rotate(0deg); }
   100% { transform: rotate(1800deg); }
