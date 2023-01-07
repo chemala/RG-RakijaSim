@@ -439,7 +439,7 @@ export class Player extends Node{
             if(this.checkPick()){
                 if(this.branchno>0){
                     b.branchno += this.branchno;
-                    this.fire+= this.branchno*4
+                    this.fire+= this.branchno*5
                     console.log(this.branchno + ' Wood deposited!');
                     this.branchno = 0;
                 }

@@ -48,7 +48,7 @@ a.back {
     border-radius: 10px;
     background: rgb(196, 202, 255, 1);
     cursor: pointer;
-    
+
     text-decoration: none;
     color: #000;
 }
@@ -263,6 +263,12 @@ img {
     font-size: 1.85rem;
     line-height: 1.2;
     padding: 1rem;
+}
+
+.instimg{
+    
+width: 100%;
+height: 100%;
 }
 
 @keyframes spin {
