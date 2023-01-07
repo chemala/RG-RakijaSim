@@ -14,8 +14,7 @@ The project is structured as follows:
 - The `lib` directory holds the libraries. We use libraries when something
   is too tedious or prone to error if written by hand or out of the scope of
   this project.
-- The `common` directory contains all the code and resources that are used
-  in multiple examples.
-- Finally, the `examples` directory contains a folder for every example.
-  Each example holds at least a .html and a .js file as an entry point,
-  potentially along with other support files associated with the example.
+- The `common` directory contains all the resources and initialisaton code used in the `game` directory
+- Finally, the `game` directory contains all of the neccessary code, classes and functions to run the game including the 
+.html file and .js files.
+
