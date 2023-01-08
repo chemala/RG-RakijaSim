@@ -371,17 +371,11 @@ export class Player extends Node{
     }
 
     pickUpHandler(scene, b){
-       
-        if(this.plumno<15){
-            this.plumPickCheck(scene,b);
-        }else{
-            Score.showPlumWarn();
-        }
-        if(this.branchno<5){
-            this.branchPickCheck(scene,b);
-        }else{
-            Score.showBranchWarn();
-        }
+        
+        this.plumPickCheck(scene,b);
+        
+        this.branchPickCheck(scene,b);
+        
         this.depositCheck(b);
         
     }
@@ -404,9 +398,13 @@ export class Player extends Node{
             scene.traverse(node => {
                 if (node.name==b.name) {
                     if(this.checkPick()){
-                        this.sounds.playPickSound();
-                        this.plumno++;
-                        scene.removeNode(node);
+                        if(this.plumno<15){
+                            this.sounds.playPickSound();
+                            this.plumno++;
+                            scene.removeNode(node);
+                        }else{
+                            Score.showPlumWarn();
+                        }
                     }
                     
                 }
@@ -419,9 +417,13 @@ export class Player extends Node{
             scene.traverse(node => {
                 if (node.name==b.name) {
                     if(this.checkPick()){
-                        this.sounds.playPickSound();
-                        this.branchno++
-                        scene.removeNode(node);
+                        if(this.branchno<5){
+                            this.sounds.playPickSound();
+                            this.branchno++
+                            scene.removeNode(node);
+                        }else{
+                            Score.showBranchWarn();
+                        }
                     }
                     
                 }
