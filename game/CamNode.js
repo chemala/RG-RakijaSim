@@ -2,7 +2,6 @@ import { vec3, mat4, vec4 } from '../../lib/gl-matrix-module.js';
 
 import { Utils } from './Utils.js';
 import { Node } from './Node.js';
-import { Breathing } from './Animation.js';
 
 
 
@@ -15,7 +14,6 @@ export class CamNode extends Node{
         this.updateProjection();
         this.player = options.player || null;
         this.world = true
-        this.animation = new Breathing(this)
         this.pointermoveHandler = this.pointermoveHandler.bind(this);
         this.keydownHandler = this.keydownHandler.bind(this);
         this.keyupHandler = this.keyupHandler.bind(this);
@@ -96,7 +94,6 @@ export class CamNode extends Node{
         mat4.rotateY(m, m, c.rotation[1]);
         mat4.rotateX(m, m, c.rotation[0]);
 
-        this.animation.breathe();
 
         }
     
