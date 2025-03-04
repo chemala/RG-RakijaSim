@@ -1,8 +1,8 @@
-# ES6/WebGL 2.0 Examples
-A collection of ES6/WebGL 2.0 examples for undergraduate computer graphics courses.
+# RG-RakijaSim
+A scavenger game made using WebGL 2.0 and ES6
 
 # Building and running
-The examples do not need to be built, but some of them require a server
+The game does not need to be built, but requires a server
 capable of serving static files (WebGL+CORS restrictions). A basic Node.js
 implementation is available in `bin/server.js`.
 
